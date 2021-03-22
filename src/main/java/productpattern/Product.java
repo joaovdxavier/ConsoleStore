@@ -1,5 +1,8 @@
 package productpattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Product {
 
     public Product() {
@@ -9,14 +12,25 @@ public class Product {
         this.name = name;
         this.price = price;
         this.description = description;
-        this.productID = countID;
         this.countID++;
+        this.productID = countID;
     }
 
+
+
+    @JsonProperty("countID")
     private static int countID = 0;
+
+    @JsonProperty("Name")
     private String name;
+
+    @JsonProperty("Price")
     private double price;
+
+    @JsonProperty("Description")
     private String description;
+
+    @JsonProperty("ID")
     private int productID;
 
     public String getName() {
@@ -33,6 +47,14 @@ public class Product {
 
     public int getProductID() {
         return productID;
+    }
+
+    public static void setCountID(int countID) {
+        Product.countID = countID;
+    }
+
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
     public void setName(String name) {
