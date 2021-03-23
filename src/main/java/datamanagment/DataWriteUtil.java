@@ -18,7 +18,7 @@ public class DataWriteUtil {
         mapper.writeValue(new File(productFileName), product);
     }
 
-    public static void writeUsers(User user) throws IOException {
+    public static void writeUser(User user) throws IOException {
         String userFileName = ".\\src\\main\\resources\\users\\user" + user.getUserID() + ".json";
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(new File(userFileName), user);

@@ -1,0 +1,23 @@
+
+’
+java:S13192"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(¸ü­üÿÿÿÿ8æÒ½İ…/
+^
+java:S18549"<Remove this useless assignment to local variable "fileName".(ŠñÅ™şÿÿÿÿ8æÒ½İ…/
+
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(¦õò×8À°àÙ…/
+^
+java:S1854#"<Remove this useless assignment to local variable "fileName".(ŠñÅ™şÿÿÿÿ8Ïöšİ…/
+O
+java:S1481#"-Remove this unused "fileName" local variable.(ŠñÅ™şÿÿÿÿ8Ïöšİ…/
+O
+java:S14819"-Remove this unused "fileName" local variable.(ŠñÅ™şÿÿÿÿ8æÒ½İ…/
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8À°àÙ…/
+
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(à®‡³8°è™Ú…/
+[
+java:S11557">Use isEmpty() to check whether the collection is empty or not.(€Û·8æÒ½İ…/
+[
+java:S1155!">Use isEmpty() to check whether the collection is empty or not.(€Û·8ãö™İ…/
+V
+java:S1118":Add a private constructor to hide the implicit public one.(´³Î8À°àÙ…/

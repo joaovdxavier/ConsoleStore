@@ -1,3 +1,39 @@
 
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+@
+ConsoleStore.iml,b\5\b54611db5fdaa3340e6040fd579aa1d13da1f4c5
+Q
+!src/main/java/menu/StartMenu.java,3\3\331c2299366243a69cf15e62e16fc3b90fb48480
+Q
+!src/main/java/enums/UserRole.java,b\7\b757a3459eb564b81ea902350d8d04bdb62ad589
+W
+'src/main/java/testdata/AddProducts.java,f\a\fac2b90e731e2357025a2b0a22d502e798c574ff
+T
+$src/main/java/testdata/AddUsers.java,f\c\fc10cddfd4dc00d46ea148d27b401244a0b1c3c7
+]
+-src/main/java/datamanagment/DataReadUtil.java,3\2\3269d3a558cd54513701ab08a3849c8921276292
+^
+.src/main/java/datamanagment/DataWriteUtil.java,e\7\e767917e3e0a90704f0260a6c2a32f4a24852077
+P
+ target/classes/products/id1.json,f\b\fbab5d604bcd8c5472d9a18e77c41a5ce39bb0b6
+P
+ target/classes/products/id2.json,3\8\386be048ac4130483df7604e02933d7d0d4a2ebe
+P
+ target/classes/products/id3.json,c\3\c301ebffa6e3defc2e88df7e597b7146b07ae4d0
+P
+ target/classes/products/id4.json,6\8\687690eeb754dc82629309b2773f9c1ceab80b75
+Y
+)src/main/java/productpattern/Product.java,1\b\1b953505c8d9b6b2b5fba150a948d6c62a351482
+S
+#src/main/java/userpattern/User.java,4\b\4b4c8bf8ba1402438a84ebea0f99d9eeaed1da9a
+O
+target/classes/users/user1.json,1\2\12f58f4e9b5837a2d67b1d3da8c2d5b4b2c1513a
+O
+target/classes/users/user2.json,1\3\13c05da1f0f80ffe06d95c87d8bb27e95c5a6549
+O
+target/classes/users/user3.json,3\1\314a7869280a27436735028481162fa20664f2d6
+O
+target/classes/users/user4.json,c\e\ce19e7e58d89e3b2abf2d163726aef63524ecf82
+G
+src/main/java/main.java,d\3\d3c26bf08301c98991887bafaf09d331e2067b4c
