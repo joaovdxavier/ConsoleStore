@@ -3,12 +3,8 @@ package datamanagment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import productpattern.Product;
 import userpattern.User;
-
 import java.io.File;
 import java.io.IOException;
-import java.io.StringWriter;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class DataWriteUtil {
 

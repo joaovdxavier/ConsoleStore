@@ -1,43 +1,36 @@
 import datamanagment.DataReadUtil;
-import datamanagment.DataWriteUtil;
 import exceptions.NotLoggedInException;
+import menu.FirstLaunchMenu;
 import menu.StartMenu;
 import productpattern.Product;
-import testdata.AddProducts;
-import testdata.AddUsers;
 import userpattern.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 
 public class main {
+    private static ArrayList<User> users = new ArrayList<>();
+    private static ArrayList<Product> products = new ArrayList<>();
+    private static HashMap<Integer, Integer> userBasket = new HashMap<>();
+    private static User currentUser = null;
+
     public static void main(String[] args) throws IOException, NotLoggedInException {
-        ArrayList<User> users = new ArrayList<>();
-        ArrayList<Product> products = new ArrayList<>();
-        User currentUser = null;
+
         products = DataReadUtil.getProducts();
+        products.sort(Product::compareTo);
         users = DataReadUtil.getUsers();
-        StartMenu.displayStartMenu(currentUser, users, products);
 
+        FirstLaunchMenu.DisplayFirstLaunchMenu(users, products);
 
-//        AddProducts.addFewProducts(products);
-//        products.forEach(Product -> {
-//            try {
-//                DataWriteUtil.writeProduct(Product);
-//            } catch (IOException ioException) {
-//                ioException.printStackTrace();
-//            }
-//        });
-//
-//
-//        AddUsers.addFewUsers(users);
-//        users.forEach(User -> {
-//            try {
-//                DataWriteUtil.writeUsers(User);
-//            } catch (IOException ioException) {
-//                ioException.printStackTrace();
-//            }
-//        });
+        if (products.isEmpty()) {
+            System.out.println("Seems like list if products is ");
+        }
+
+        StartMenu startMenu = new StartMenu(currentUser, users, products, userBasket);
+
+        startMenu.displayStartMenu();
 
         System.out.println("Buy! See you later!");
     }

@@ -21,5 +21,4 @@ public class StringInputUtil {
         }
         return x;
     }
-
 }

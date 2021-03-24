@@ -6,7 +6,8 @@ import enums.UserRole;
 public class User {
 
     public User(){
-
+        User.countID++;
+        this.userID = User.countID;
     }
 
     public User(String name, String lastName, UserRole role, String email, String password) {
@@ -63,12 +64,20 @@ public class User {
         return userID;
     }
 
+    public static int getCountID() {
+        return countID;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
     public void setEmail(String email) {

@@ -1,23 +1,23 @@
 
+O
+java:S14819"-Remove this unused "fileName" local variable.(äÒ≈ô˛ˇˇˇˇ8Ê“Ω›Ö/
+O
+java:S1481#"-Remove this unused "fileName" local variable.(äÒ≈ô˛ˇˇˇˇ8œˆö›Ö/
+ç
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(¶ıÚ◊8¿∞‡ŸÖ/
+[
+java:S11557">Use isEmpty() to check whether the collection is empty or not.(Ä€∑ù8Ê“Ω›Ö/
+^
+java:S1854#"<Remove this useless assignment to local variable "fileName".(äÒ≈ô˛ˇˇˇˇ8œˆö›Ö/
 í
 java:S13192"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(∏é¸≠¸ˇˇˇˇ8Ê“Ω›Ö/
 ^
 java:S18549"<Remove this useless assignment to local variable "fileName".(äÒ≈ô˛ˇˇˇˇ8Ê“Ω›Ö/
-ç
-java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(¶ıÚ◊8¿∞‡ŸÖ/
-^
-java:S1854#"<Remove this useless assignment to local variable "fileName".(äÒ≈ô˛ˇˇˇˇ8œˆö›Ö/
-O
-java:S1481#"-Remove this unused "fileName" local variable.(äÒ≈ô˛ˇˇˇˇ8œˆö›Ö/
-O
-java:S14819"-Remove this unused "fileName" local variable.(äÒ≈ô˛ˇˇˇˇ8Ê“Ω›Ö/
 M
 java:S1128"+Remove this unused import 'java.util.List'.(’Î±ƒ¯ˇˇˇˇ8¿∞‡ŸÖ/
+V
+java:S1118":Add a private constructor to hide the implicit public one.(¥≥Œ8¿∞‡ŸÖ/
 ç
 java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(‡Æá≥8∞Ëô⁄Ö/
 [
-java:S11557">Use isEmpty() to check whether the collection is empty or not.(Ä€∑ù8Ê“Ω›Ö/
-[
 java:S1155!">Use isEmpty() to check whether the collection is empty or not.(Ä€∑ù8„ˆô›Ö/
-V
-java:S1118":Add a private constructor to hide the implicit public one.(¥≥Œ8¿∞‡ŸÖ/

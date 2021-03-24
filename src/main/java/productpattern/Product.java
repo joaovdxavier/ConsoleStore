@@ -3,9 +3,11 @@ package productpattern;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Product {
+public class Product implements Comparable<Product> {
 
     public Product() {
+        this.countID++;
+        this.productID = countID;
     }
 
     public Product(String name, double price, String description) {
@@ -49,6 +51,10 @@ public class Product {
         return productID;
     }
 
+    public static int getCountID() {
+        return countID;
+    }
+
     public static void setCountID(int countID) {
         Product.countID = countID;
     }
@@ -67,5 +73,11 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    @Override
+    public int compareTo(Product o) {
+        return this.productID - o.productID;
     }
 }

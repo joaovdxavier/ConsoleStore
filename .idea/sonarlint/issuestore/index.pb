@@ -37,3 +37,39 @@ O
 target/classes/users/user4.json,c\e\ce19e7e58d89e3b2abf2d163726aef63524ecf82
 G
 src/main/java/main.java,d\3\d3c26bf08301c98991887bafaf09d331e2067b4c
+T
+$src/main/resources/products/id1.json,c\5\c518008b615d1fcb20556379c01aa479eecc9668
+T
+$src/main/resources/products/id2.json,0\5\0511a0c4be0f03de56432739d311690a83162b57
+T
+$src/main/resources/products/id3.json,3\5\35b3e9ad7562abaa0790251c65e6cc92461c5c96
+T
+$src/main/resources/products/id4.json,e\5\e5a350dd23ea10b8f389ddcde209fdc6a38906e6
+Z
+*src/main/java/inpututils/IntInputUtil.java,6\3\639d0bf98151a10f06cb93970dd6d72275930575
+b
+2src/main/java/exceptions/NotLoggedInException.java,4\e\4e97bf3e06068773ea678e1e04dc259fe0eebfeb
+]
+-src/main/java/inpututils/StringInputUtil.java,a\a\aac73abdd7d289705955199c37736e673d0f8ac4
+S
+#src/main/resources/users/user1.json,1\0\1094ac42f80146b18b3e3cea6b28a7f1640d661a
+S
+#src/main/resources/users/user2.json,4\d\4d653ddbf72bfe4e4244345c2413229daba7dfda
+S
+#src/main/resources/users/user3.json,c\1\c17703765c316b8433c194d6b197ac793f440161
+S
+#src/main/resources/users/user4.json,8\9\89c6a945b4c2738fb6cd8bfdfa5607bd4d1f3aad
+S
+#src/main/resources/users/user5.json,d\4\d4d26e2235578bee8e8b642cea170f2f24496721
+O
+target/classes/users/user5.json,c\e\ce83a95da0a9bcc4399fcdea3a7d4773a62cb5ce
+S
+#src/main/resources/users/user6.json,5\c\5c43b06d8834f2ffae7623ef7ee29e7865322305
+O
+target/classes/users/user6.json,8\d\8d930299f38d8d41fa4227a65431770d569b43dd
+S
+#src/main/resources/users/user7.json,a\6\a641f447268ca3c9fd6b6dced4b075cd993c86d6
+O
+target/classes/users/user7.json,6\2\62ccbd6025d8b501d0391af11c4862b0e8177192
+S
+#src/main/resources/users/user8.json,7\d\7dbd6c88c71f2bbab5e034e4aa175283aab97bce

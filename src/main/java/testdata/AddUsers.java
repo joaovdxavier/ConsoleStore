@@ -1,21 +1,47 @@
 package testdata;
 
+import datamanagment.DataWriteUtil;
 import enums.UserRole;
 import userpattern.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class AddUsers {
-    public static void addFewUsers (ArrayList<User> users){
-        User user1 = new User("UserName1", "UserLastname1", UserRole.USER, "User1@mail.com", "User1password");
-        User user2 = new User("UserName2", "UserLastname2", UserRole.USER, "User2@mail.com", "User2password");
-        User user3 = new User("UserName3", "UserLastname3", UserRole.USER, "User3@mail.com", "User3password");
-        User admin1 = new User("AdminName1", "Admin1Lastname1", UserRole.USER, "Admin1@mail.com", "Admin1password");
+    private static String userName = "UserName%s";
+    private static String userLastName = "UserLastName%s";
+    private static UserRole userRole = UserRole.USER;
+    private static String userEmail = "user%s@mail.com";
 
-        users.add(user1);
-        users.add(user2);
-        users.add(user3);
-        users.add(admin1);
+    private static String adminName = "AdminName%s";
+    private static String adminLastName = "AdminLastName%s";
+    private static UserRole adminRole = UserRole.ADMIN;
+    private static String adminEmail = "admin%s@mail.com";
 
+    private static String password = "User%spassword";
+
+    public static void addFewUsers (ArrayList<User> users, int count) throws IOException {
+        int i = User.getCountID();
+        int j = i + count;
+        for (i = User.getCountID(); i < j; i++) {
+            User newUser = new User();
+            int id = newUser.getUserID();
+            if (i % 2 == 0) {
+                newUser.setName(String.format(userName, id));
+                newUser.setLastName(String.format(userLastName, id));
+                newUser.setRole(userRole);
+                newUser.setEmail(String.format(userEmail, id));
+            } else {
+                newUser.setName(String.format(adminName, id));
+                newUser.setLastName(String.format(adminLastName, id));
+                newUser.setRole(adminRole);
+                newUser.setEmail(String.format(adminEmail, id));
+            }
+
+            newUser.setPassword(String.format(password, id));
+
+            users.add(newUser);
+            DataWriteUtil.writeUser(newUser);
+        }
     }
 }

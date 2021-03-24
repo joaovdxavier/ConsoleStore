@@ -21,5 +21,4 @@ public class IntInputUtil {
         }
         return x;
     }
-
 }

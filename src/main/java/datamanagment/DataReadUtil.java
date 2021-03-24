@@ -19,7 +19,7 @@ public class DataReadUtil {
 
         try (DirectoryStream<Path> files = Files.newDirectoryStream(directory)) {
             for (Path path : files)
-               filesList.add(path);
+                filesList.add(path);
         }
 
         return filesList;
@@ -68,5 +68,4 @@ public class DataReadUtil {
         }
         return usersList;
     }
-
 }
