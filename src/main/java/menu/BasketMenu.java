@@ -34,9 +34,8 @@ public class BasketMenu {
 
         int paragraph;
         do {
-            System.out.println("""
-                    1. Type 1 to clear basket.
-                    2. Type 2 to return to main menu""");
+            System.out.println("1. Type 1 to clear basket.\n" +
+                    "2. Type 2 to return to main menu\n");
             paragraph = IntInputUtil.get();
             if (paragraph == 1) {
                 userBasket.clear();

@@ -28,14 +28,14 @@ public class StartMenu {
 
         int menuNumber;
         do {
-            System.out.println("""
-                    Choose one of the menu paragraphs:
-                    1. Store
-                    2. Basket
-                    3. Profile
-                    4. Login / registration
-                    5. Exit
-                    """);
+            System.out.println(
+                    "Choose one of the menu paragraphs:\n" +
+                    "1. Store\n" +
+                    "2. Basket\n" +
+                    "3. Profile\n" +
+                    "4. Login / registration\n" +
+                    "5. Exit\n");
+
             menuNumber = IntInputUtil.get();
 
             try {

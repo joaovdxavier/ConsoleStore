@@ -15,9 +15,7 @@ public class StoreMenu {
 
         Check.checkLogin(currentUser, currentUsers, currentProducts, userBasket);
 
-        System.out.println("""
-                Product list.                
-                """);
+        System.out.println("Product list.");
         for (Product product : currentProducts) {
             System.out.print("Product id: " + product.getProductID());
             System.out.println(". Product name: " + product.getName());
@@ -31,8 +29,6 @@ public class StoreMenu {
 
         if (variant < 0 || variant > (currentProducts.size())) {
             throw new NonExistentProductId();
-        } else {
-            ProductMenu.displayProductMenu(variant, currentUser, currentUsers, currentProducts, userBasket);
         }
     }
 }
