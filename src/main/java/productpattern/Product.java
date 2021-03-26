@@ -1,6 +1,5 @@
 package productpattern;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Product implements Comparable<Product> {

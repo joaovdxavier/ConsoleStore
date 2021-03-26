@@ -1,22 +1,14 @@
 package menu;
 
 import exceptions.NotLoggedInException;
-import productpattern.Product;
-import userpattern.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ProfileMenu {
-    public static void displayProfileMenu(User currentUser, ArrayList<User> currentUsers, ArrayList<Product> currentProducts,
-                                          HashMap<Integer, Integer> userBasket) throws NotLoggedInException {
-
-        Check.checkLogin(currentUser, currentUsers, currentProducts, userBasket);
-
-        System.out.println("User name: " + currentUser.getName());
-        System.out.println("User last name: " + currentUser.getLastName());
-        System.out.println("User email: " + currentUser.getEmail());
-        System.out.println("User password: " + currentUser.getPassword());
+    public static void displayProfileMenu(MenuData menuData) throws NotLoggedInException {
+        System.out.println("User name: " + menuData.getCurrentUser().getName());
+        System.out.println("User last name: " + menuData.getCurrentUser().getLastName());
+        System.out.println("User email: " + menuData.getCurrentUser().getEmail());
+        System.out.println("User password: " + menuData.getCurrentUser().getPassword());
         System.out.println();
     }
 }

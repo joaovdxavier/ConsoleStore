@@ -1,6 +1,6 @@
 package testdata;
 
-import datamanagment.DataWriteUtil;
+import datamanagment.DataUtil;
 import productpattern.Product;
 
 import java.io.IOException;
@@ -20,8 +20,8 @@ public class AddProducts {
             newProduct.setDescription(String.format(description, id));
             newProduct.setPrice(id * 10);
 
-            products.add(newProduct);
-            DataWriteUtil.writeProduct(newProduct);
+            if (products == null) products = new ArrayList<>();
+            DataUtil.writeProduct(newProduct);
         }
     }
 }

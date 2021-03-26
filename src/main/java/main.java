@@ -1,13 +1,11 @@
-import datamanagment.DataReadUtil;
+import datamanagment.DataUtil;
 import exceptions.NotLoggedInException;
 import menu.FirstLaunchMenu;
-import menu.StartMenu;
+import menu.MenuData;
 import productpattern.Product;
 import userpattern.User;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 
 public class main {
@@ -17,21 +15,13 @@ public class main {
     private static User currentUser = null;
 
     public static void main(String[] args) throws IOException, NotLoggedInException {
+        products = DataUtil.getProducts();
+        users = DataUtil.getUsers();
+        if (!products.isEmpty()) products.sort(Product::compareTo);
 
-        products = DataReadUtil.getProducts();
-        products.sort(Product::compareTo);
-        users = DataReadUtil.getUsers();
+        MenuData menuData = new MenuData(currentUser, users, products, userBasket);
+        menuData.launchStartMenu();
 
-        FirstLaunchMenu.DisplayFirstLaunchMenu(users, products);
-
-        if (products.isEmpty()) {
-            System.out.println("Seems like list if products is ");
-        }
-
-        StartMenu startMenu = new StartMenu(currentUser, users, products, userBasket);
-
-        startMenu.displayStartMenu();
-
-        System.out.println("Buy! See you later!");
+        System.out.println("Buy! See you later, Space Cowboy!");
     }
 }

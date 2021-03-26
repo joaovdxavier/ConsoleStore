@@ -2,21 +2,15 @@ package menu;
 
 import exceptions.NonExistentProductId;
 import exceptions.NotLoggedInException;
-import inpututils.IntInputUtil;
+import inpututils.InputUtil;
 import productpattern.Product;
-import userpattern.User;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ProductMenu {
-    public static void displayProductMenu(int productId, User currentUser, ArrayList<User> currentUsers,
-                                          ArrayList<Product> currentProducts, HashMap<Integer, Integer> userBasket)
-            throws NonExistentProductId, NotLoggedInException {
+    public static void displayProductMenu(MenuData menuData, int productId) throws NonExistentProductId {
 
         Product currentProduct = null;
 
-        for (Product product : currentProducts) {
+        for (Product product : menuData.getProducts()) {
             if (product.getProductID() == productId) {
                 currentProduct = product;
                 break;
@@ -35,22 +29,22 @@ public class ProductMenu {
 
             int paragraph;
             do {
-                paragraph = IntInputUtil.get();
+                paragraph = InputUtil.getInt();
                 if (paragraph == 1) {
                     System.out.println("How many of " +
                             currentProduct.getName() +
                             " do you wanna add to basket? (from 1 to 100000)");
                     int count;
                     do {
-                        count = IntInputUtil.get();
+                        count = InputUtil.getInt();
                     } while (count < 1 || count > 100000);
 
-                    if (userBasket.containsKey(count)) {
-                        int previousCount = userBasket.get(currentProduct.getProductID());
+                    if (menuData.getUserBasket().containsKey(productId)) {
+                        int previousCount = menuData.getUserBasket().get(currentProduct.getProductID());
                         int newCount = previousCount + count;
-                        userBasket.put(currentProduct.getProductID(), newCount);
+                        menuData.getUserBasket().put(currentProduct.getProductID(), newCount);
                     } else {
-                        userBasket.put(currentProduct.getProductID(), count);
+                        menuData.getUserBasket().put(currentProduct.getProductID(), count);
                     }
 
                     System.out.println("Product was added successfully!");

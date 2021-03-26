@@ -1,6 +1,6 @@
 package testdata;
 
-import datamanagment.DataWriteUtil;
+import datamanagment.DataUtil;
 import enums.UserRole;
 import userpattern.User;
 
@@ -40,8 +40,9 @@ public class AddUsers {
 
             newUser.setPassword(String.format(password, id));
 
+            if (users == null) users = new ArrayList<>();
             users.add(newUser);
-            DataWriteUtil.writeUser(newUser);
+            DataUtil.writeUser(newUser);
         }
     }
 }
