@@ -17,7 +17,11 @@ public class main {
     public static void main(String[] args) throws IOException, NotLoggedInException {
         products = DataUtil.getProducts();
         users = DataUtil.getUsers();
-        if (!products.isEmpty()) products.sort(Product::compareTo);
+        if (products == null || users == null || products.isEmpty() || users.isEmpty()) {
+            FirstLaunchMenu.DisplayFirstLaunchMenu(users, products);
+            products = DataUtil.getProducts();
+            users = DataUtil.getUsers();
+        }
 
         MenuData menuData = new MenuData(currentUser, users, products, userBasket);
         menuData.launchStartMenu();

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class DataUtil {
@@ -69,15 +70,12 @@ public class DataUtil {
             }
             if (objectType == ObjectType.USER) {
                 User.setCountID(maxId);
+                users = usersList;
             } else if (objectType == ObjectType.PRODUCT) {
-              Product.setCountID(maxId);
+                Product.setCountID(maxId);
+                products = productsList;
             }
-        } else {
-            FirstLaunchMenu.DisplayFirstLaunchMenu(usersList, productsList);
         }
-
-        users = usersList;
-        products = productsList;
     }
 
     private static void writeFile(File file, Object object) throws IOException {
@@ -87,7 +85,8 @@ public class DataUtil {
 
     private static ArrayList<Path> getFilesList(String directoryPath) throws IOException {
         ArrayList<Path> filesList = new ArrayList<>();
-        Path directory = Path.of(directoryPath);
+//        Path directory = Path.of(directoryPath);
+        Path directory = Paths.get(directoryPath);
 
         try (DirectoryStream<Path> files = Files.newDirectoryStream(directory)) {
             for (Path path : files)
