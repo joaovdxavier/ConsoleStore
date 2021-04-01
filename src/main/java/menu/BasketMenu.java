@@ -15,7 +15,7 @@ public class BasketMenu {
         } else {
             menuData.getUserBasket().forEach((id, count) -> {
                 menuData.getProducts().forEach(product -> {
-                    if (product.getProductID() == id) {
+                    if (product.getId() == id) {
                         System.out.println("Product name: " + product.getName() + " Count: " + count);
                         countPrice += product.getPrice() * count;
                     }
@@ -28,7 +28,7 @@ public class BasketMenu {
         int paragraph;
         do {
             System.out.println("1. Type 1 to clear basket.\n" +
-                    "2. Type 2 to return to main menu\n");
+                    "2. Type 2 to return to Main menu\n");
             paragraph = InputUtil.getInt();
             if (paragraph == 1) {
                 menuData.getUserBasket().clear();

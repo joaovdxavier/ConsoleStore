@@ -1,10 +1,9 @@
 package datamanagment;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import enums.ObjectType;
-import menu.FirstLaunchMenu;
-import productpattern.Product;
-import userpattern.User;
+import enums.DataTypes;
+import dataobjects.Product;
+import dataobjects.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,27 +18,27 @@ public class DataUtil {
     private static ArrayList<Product> products;
 
     public static void writeProduct(Product product) throws IOException {
-        String productFileName = ".\\src\\main\\resources\\products\\id" + product.getProductID() + ".json";
+        String productFileName = ".\\src\\Main\\resources\\products\\id" + product.getId() + ".json";
         writeFile(new File(productFileName), product);
     }
 
     public static void writeUser(User user) throws IOException {
-        String userFileName = ".\\src\\main\\resources\\users\\user" + user.getUserID() + ".json";
+        String userFileName = ".\\src\\Main\\resources\\users\\user" + user.getId() + ".json";
         writeFile(new File(userFileName), user);
     }
 
 
     public static ArrayList<Product> getProducts() throws IOException {
-        fillArrayList(ObjectType.PRODUCT);
+        fillArrayList(DataTypes.PRODUCT);
         return products;
     }
 
     public static ArrayList<User> getUsers() throws IOException {
-        fillArrayList(ObjectType.USER);
+        fillArrayList(DataTypes.USER);
         return users;
     }
 
-    private static void fillArrayList(ObjectType objectType) throws IOException {
+    private static void fillArrayList(DataTypes dataTypes) throws IOException {
         ArrayList<User> usersList = null;
         ArrayList<Product> productsList = null;
         ArrayList<Path> filesList = null;
@@ -47,31 +46,31 @@ public class DataUtil {
         Product currentProduct;
         int maxId = Integer.MIN_VALUE;
 
-        if (objectType == ObjectType.USER) {
-            filesList = getFilesList(".\\src\\main\\resources\\users");
+        if (dataTypes == DataTypes.USER) {
+            filesList = getFilesList(".\\src\\Main\\resources\\users");
             usersList = new ArrayList<>();
-        } else if (objectType == ObjectType.PRODUCT) {
-            filesList = getFilesList(".\\src\\main\\resources\\products");
+        } else if (dataTypes == DataTypes.PRODUCT) {
+            filesList = getFilesList(".\\src\\Main\\resources\\products");
             productsList = new ArrayList<>();
         }
 
         ObjectMapper mapper = new ObjectMapper();
         if (!filesList.isEmpty()) {
             for (Path path : filesList) {
-                if (objectType == ObjectType.USER) {
+                if (dataTypes == DataTypes.USER) {
                     currentUser = mapper.readValue(new File(path.toString()), User.class);
                     usersList.add(currentUser);
-                    if (currentUser.getUserID() > maxId) maxId = currentUser.getUserID();
-                } else if (objectType == ObjectType.PRODUCT) {
+                    if (currentUser.getId() > maxId) maxId = currentUser.getId();
+                } else if (dataTypes == DataTypes.PRODUCT) {
                     currentProduct = mapper.readValue(new File(path.toString()), Product.class);
                     productsList.add(currentProduct);
-                    if (currentProduct.getProductID() > maxId) maxId = currentProduct.getProductID();
+                    if (currentProduct.getId() > maxId) maxId = currentProduct.getId();
                 }
             }
-            if (objectType == ObjectType.USER) {
+            if (dataTypes == DataTypes.USER) {
                 User.setCountID(maxId);
                 users = usersList;
-            } else if (objectType == ObjectType.PRODUCT) {
+            } else if (dataTypes == DataTypes.PRODUCT) {
                 Product.setCountID(maxId);
                 products = productsList;
             }

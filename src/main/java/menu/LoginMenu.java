@@ -4,7 +4,7 @@ import datamanagment.DataUtil;
 import enums.UserRole;
 import exceptions.NotLoggedInException;
 import inpututils.InputUtil;
-import userpattern.User;
+import dataobjects.User;
 import java.io.IOException;
 
 public class LoginMenu {
@@ -40,7 +40,7 @@ public class LoginMenu {
                 System.out.println("There are no users with this email: " + email);
                 System.out.println("Do you wanna create an account with this email?");
                 System.out.println("1. Create an account");
-                System.out.println("2. Back to the main menu");
+                System.out.println("2. Back to the Main menu");
                 menuParagraph = InputUtil.getInt();
             } while (menuParagraph != 1 && menuParagraph != 2);
 

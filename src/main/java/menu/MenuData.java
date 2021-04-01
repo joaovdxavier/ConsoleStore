@@ -1,9 +1,10 @@
 package menu;
 
-import exceptions.NotLoggedInException;
-import productpattern.Product;
-import userpattern.User;
+import datamanagment.DataUtil;
+import dataobjects.Product;
+import dataobjects.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,7 +14,12 @@ public class MenuData {
     private ArrayList<Product> products;
     private HashMap<Integer, Integer> userBasket;
 
-    public MenuData(User currentUser, ArrayList<User> users, ArrayList<Product> products, HashMap<Integer, Integer> userBasket) {
+    public MenuData(User currentUser, ArrayList<User> users, ArrayList<Product> products, HashMap<Integer, Integer> userBasket) throws IOException {
+        if (products == null || users == null || products.isEmpty() || users.isEmpty()) {
+            DataGenerationMenu.DisplayFirstLaunchMenu(users, products);
+            products = DataUtil.getProducts();
+            users = DataUtil.getUsers();
+        }
         this.currentUser = currentUser;
         this.users = users;
         this.products = products;

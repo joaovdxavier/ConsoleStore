@@ -1,12 +1,12 @@
-package productpattern;
+package dataobjects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Product implements Comparable<Product> {
+public class Product implements Comparable<Product>, DataObject {
 
     public Product() {
         this.countID++;
-        this.productID = countID;
+        this.id = countID;
     }
 
     public Product(String name, double price, String description) {
@@ -14,7 +14,7 @@ public class Product implements Comparable<Product> {
         this.price = price;
         this.description = description;
         this.countID++;
-        this.productID = countID;
+        this.id = countID;
     }
 
 
@@ -32,7 +32,7 @@ public class Product implements Comparable<Product> {
     private String description;
 
     @JsonProperty("ID")
-    private int productID;
+    private int id;
 
     public String getName() {
         return name;
@@ -46,8 +46,8 @@ public class Product implements Comparable<Product> {
         return description;
     }
 
-    public int getProductID() {
-        return productID;
+    public int getId() {
+        return id;
     }
 
     public static int getCountID() {
@@ -58,8 +58,8 @@ public class Product implements Comparable<Product> {
         Product.countID = countID;
     }
 
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -77,6 +77,6 @@ public class Product implements Comparable<Product> {
 
     @Override
     public int compareTo(Product o) {
-        return this.productID - o.productID;
+        return this.id - o.id;
     }
 }

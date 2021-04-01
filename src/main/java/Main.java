@@ -1,27 +1,21 @@
 import datamanagment.DataUtil;
-import exceptions.NotLoggedInException;
-import menu.FirstLaunchMenu;
+import menu.DataGenerationMenu;
 import menu.MenuData;
-import productpattern.Product;
-import userpattern.User;
+import dataobjects.Product;
+import dataobjects.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class main {
+public class Main {
     private static ArrayList<User> users = new ArrayList<>();
     private static ArrayList<Product> products = new ArrayList<>();
     private static HashMap<Integer, Integer> userBasket = new HashMap<>();
     private static User currentUser = null;
 
-    public static void main(String[] args) throws IOException, NotLoggedInException {
+    public static void main(String[] args) throws IOException {
         products = DataUtil.getProducts();
         users = DataUtil.getUsers();
-        if (products == null || users == null || products.isEmpty() || users.isEmpty()) {
-            FirstLaunchMenu.DisplayFirstLaunchMenu(users, products);
-            products = DataUtil.getProducts();
-            users = DataUtil.getUsers();
-        }
 
         MenuData menuData = new MenuData(currentUser, users, products, userBasket);
         menuData.launchStartMenu();

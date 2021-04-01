@@ -23,7 +23,7 @@ public class StartMenu {
 
             try {
                 if (menuNumber >= 1 && menuNumber <= 3) {
-                    Check.checkLogin(menuData.getCurrentUser());
+                    LoginCheck.checkLogin(menuData.getCurrentUser());
                     switch (menuNumber) {
                         case 1:
                             StoreMenu.displayStoreMenu(menuData);

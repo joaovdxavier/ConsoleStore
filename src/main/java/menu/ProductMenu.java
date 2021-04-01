@@ -1,9 +1,8 @@
 package menu;
 
 import exceptions.NonExistentProductId;
-import exceptions.NotLoggedInException;
 import inpututils.InputUtil;
-import productpattern.Product;
+import dataobjects.Product;
 
 public class ProductMenu {
     public static void displayProductMenu(MenuData menuData, int productId) throws NonExistentProductId {
@@ -11,7 +10,7 @@ public class ProductMenu {
         Product currentProduct = null;
 
         for (Product product : menuData.getProducts()) {
-            if (product.getProductID() == productId) {
+            if (product.getId() == productId) {
                 currentProduct = product;
                 break;
             }
@@ -20,7 +19,7 @@ public class ProductMenu {
         if (currentProduct == null) {
             throw new NonExistentProductId();
         } else {
-            System.out.println("Product ID: " + currentProduct.getProductID());
+            System.out.println("Product ID: " + currentProduct.getId());
             System.out.println("Product name: " + currentProduct.getName());
             System.out.println("Product description: " + currentProduct.getDescription());
             System.out.println("Product price: " + currentProduct.getPrice());
@@ -40,11 +39,11 @@ public class ProductMenu {
                     } while (count < 1 || count > 100000);
 
                     if (menuData.getUserBasket().containsKey(productId)) {
-                        int previousCount = menuData.getUserBasket().get(currentProduct.getProductID());
+                        int previousCount = menuData.getUserBasket().get(currentProduct.getId());
                         int newCount = previousCount + count;
-                        menuData.getUserBasket().put(currentProduct.getProductID(), newCount);
+                        menuData.getUserBasket().put(currentProduct.getId(), newCount);
                     } else {
-                        menuData.getUserBasket().put(currentProduct.getProductID(), count);
+                        menuData.getUserBasket().put(currentProduct.getId(), count);
                     }
 
                     System.out.println("Product was added successfully!");

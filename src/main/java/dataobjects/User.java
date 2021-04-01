@@ -1,13 +1,13 @@
-package userpattern;
+package dataobjects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import enums.UserRole;
 
-public class User {
+public class User implements DataObject {
 
     public User(){
         User.countID++;
-        this.userID = User.countID;
+        this.id = User.countID;
     }
 
     public User(String name, String lastName, UserRole role, String email, String password) {
@@ -17,7 +17,7 @@ public class User {
         this.email = email;
         this.password = password;
         User.countID++;
-        this.userID = User.countID;
+        this.id = User.countID;
     }
 
     private static int countID = 0;
@@ -38,7 +38,7 @@ public class User {
     private String password;
 
     @JsonProperty("Id")
-    private int userID;
+    private int id;
 
     public String getName() {
         return name;
@@ -60,8 +60,8 @@ public class User {
         return password;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getId() {
+        return id;
     }
 
     public static int getCountID() {

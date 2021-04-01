@@ -1,6 +1,6 @@
 package enums;
 
-public enum ObjectType {
+public enum DataTypes {
     PRODUCT,
     USER
 }
