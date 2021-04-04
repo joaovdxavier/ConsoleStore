@@ -1,73 +1,53 @@
 package menu;
 
-import datamanagment.DataUtil;
-import enums.UserRole;
+import datamanagment.CurrentDataSingleton;
+import exceptions.NonExistentProductId;
 import exceptions.NotLoggedInException;
 import inpututils.InputUtil;
 import dataobjects.User;
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class LoginMenu {
-    public static void displayLoginMenu(MenuData menuData)
-            throws NotLoggedInException, IOException {
+public class LoginMenu implements MenuItem {
+    @Override
+    public void displayMenu()
+            throws NotLoggedInException, IOException, NonExistentProductId {
         String email;
         boolean userWasFound = false;
+        ArrayList<User> users = CurrentDataSingleton.getInstance().getUsers();
         System.out.println("Login menu");
         System.out.println("Enter email:");
         email = InputUtil.getString();
-        for (User user : menuData.getUsers()) {
+
+        for (User user : users) {
             if (user.getEmail().equalsIgnoreCase(email)) {
-                System.out.println("A user with the given email was found: "
-                        + user.getName() + " " + user.getLastName());
-                System.out.println("Enter password: ");
-                String password = InputUtil.getString();
-                if (user.getPassword().equals(password)) {
-                    System.out.println("You entered the correct password. \n" +
-                            "Hello " + user.getName() + " " + user.getLastName());
-                    menuData.setCurrentUser(user);
-                    userWasFound = true;
-                    break;
-                } else {
-                    System.out.println("Wrong password.");
-                    return;
-                }
+                passwordCheck(user);
+                userWasFound = true;
             }
         }
 
         if (!userWasFound) {
-            int menuParagraph;
-            do {
-                System.out.println("There are no users with this email: " + email);
-                System.out.println("Do you wanna create an account with this email?");
-                System.out.println("1. Create an account");
-                System.out.println("2. Back to the Main menu");
-                menuParagraph = InputUtil.getInt();
-            } while (menuParagraph != 1 && menuParagraph != 2);
-
-            if (menuParagraph == 1) {
-                System.out.println("Creating a new user.");
-                System.out.println("Your email: " + email);
-                System.out.println("Enter your name: ");
-                String name = InputUtil.getString();
-                System.out.println("Enter your last name: ");
-                String lastName = InputUtil.getString();
-                int role;
-                do {
-                    System.out.println("Choose your role: \n" +
-                            "1. User \n" +
-                            "2. Admin \n");
-                    role = InputUtil.getInt();
-                } while (role != 1 && role != 2);
-                UserRole userRole = role == 1 ? UserRole.USER : UserRole.ADMIN;
-                System.out.println("Enter your password: ");
-                String password = InputUtil.getString();
-
-                User newUser = new User(name, lastName, userRole, email, password);
-                menuData.getUsers().add(newUser);
-                DataUtil.writeUser(newUser);
-                menuData.getUserBasket().clear();
-                System.out.println("Your account have been successfully created and stored in our base! ");
-            }
+            MenuManager.getInstance().displaySelectedMenu(8);
         }
+    }
+
+    private void passwordCheck(User user) throws IOException {
+        System.out.println("A user with the given email was found: "
+                + user.getName() + " " + user.getLastName());
+        System.out.println("Enter password: ");
+        String password = InputUtil.getString();
+        if (user.getPassword().equals(password)) {
+            System.out.println("You entered the correct password. \n" +
+                    "Hello " + user.getName() + " " + user.getLastName());
+            CurrentDataSingleton.getInstance().setCurrentUser(user);
+        } else {
+            System.out.println("Wrong password.");
+            return;
+        }
+    }
+
+    @Override
+    public int getMenuID() {
+        return 4;
     }
 }

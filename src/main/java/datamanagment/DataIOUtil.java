@@ -1,6 +1,7 @@
 package datamanagment;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dataobjects.DataObject;
 import enums.DataTypes;
 import dataobjects.Product;
 import dataobjects.User;
@@ -13,20 +14,23 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class DataUtil {
-    private static ArrayList<User> users;
-    private static ArrayList<Product> products;
+public class DataIOUtil {
+    private static ArrayList<User> users = new ArrayList<>();
+    private static ArrayList<Product> products = new ArrayList<>();
+    private static String resourcesDir = ".\\src\\Main\\resources";
+    private static String usersDir = ".\\src\\Main\\resources\\users";
+    private static String productsDir = ".\\src\\Main\\resources\\products";
+
 
     public static void writeProduct(Product product) throws IOException {
         String productFileName = ".\\src\\Main\\resources\\products\\id" + product.getId() + ".json";
-        writeFile(new File(productFileName), product);
+        writeFile(productsDir, new File(productFileName), product);
     }
 
     public static void writeUser(User user) throws IOException {
         String userFileName = ".\\src\\Main\\resources\\users\\user" + user.getId() + ".json";
-        writeFile(new File(userFileName), user);
+        writeFile(usersDir, new File(userFileName), user);
     }
-
 
     public static ArrayList<Product> getProducts() throws IOException {
         fillArrayList(DataTypes.PRODUCT);
@@ -39,18 +43,18 @@ public class DataUtil {
     }
 
     private static void fillArrayList(DataTypes dataTypes) throws IOException {
-        ArrayList<User> usersList = null;
-        ArrayList<Product> productsList = null;
-        ArrayList<Path> filesList = null;
+        ArrayList<User> usersList = new ArrayList<>();
+        ArrayList<Product> productsList = new ArrayList<>();
+        ArrayList<Path> filesList = new ArrayList<>();
         User currentUser;
         Product currentProduct;
         int maxId = Integer.MIN_VALUE;
 
         if (dataTypes == DataTypes.USER) {
-            filesList = getFilesList(".\\src\\Main\\resources\\users");
+            filesList = getFilesList(usersDir);
             usersList = new ArrayList<>();
         } else if (dataTypes == DataTypes.PRODUCT) {
-            filesList = getFilesList(".\\src\\Main\\resources\\products");
+            filesList = getFilesList(productsDir);
             productsList = new ArrayList<>();
         }
 
@@ -77,14 +81,18 @@ public class DataUtil {
         }
     }
 
-    private static void writeFile(File file, Object object) throws IOException {
+    private static void writeFile(String dir, File file, Object object) throws IOException {
+        createDir(dir);
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(file, object);
     }
 
     private static ArrayList<Path> getFilesList(String directoryPath) throws IOException {
+        createDir(resourcesDir);
+        createDir(usersDir);
+        createDir(productsDir);
+
         ArrayList<Path> filesList = new ArrayList<>();
-//        Path directory = Path.of(directoryPath);
         Path directory = Paths.get(directoryPath);
 
         try (DirectoryStream<Path> files = Files.newDirectoryStream(directory)) {
@@ -92,5 +100,16 @@ public class DataUtil {
                 filesList.add(path);
         }
         return filesList;
+    }
+
+    public static boolean dirExists(String dir) {
+        return (Files.isDirectory(Paths.get(dir)) || Files.exists(Paths.get(dir)));
+    }
+
+    public static void createDir(String dir) throws IOException {
+        Path path = Paths.get(dir);
+        if (!dirExists(dir)) {
+            Files.createDirectory(path);
+        }
     }
 }

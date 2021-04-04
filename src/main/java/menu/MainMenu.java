@@ -1,15 +1,17 @@
 package menu;
 
+import datamanagment.CurrentDataSingleton;
 import exceptions.NonExistentProductId;
 import exceptions.NotLoggedInException;
 import inpututils.InputUtil;
 
 import java.io.IOException;
 
-public class StartMenu {
-
-    public static void displayStartMenu(MenuData menuData) {
+public class MainMenu implements MenuItem {
+    @Override
+    public void displayMenu() throws IOException, NotLoggedInException, NonExistentProductId {
         int menuNumber;
+        boolean exit = false;
         do {
             System.out.println(
                     "Choose one of the menu paragraphs:\n" +
@@ -23,30 +25,26 @@ public class StartMenu {
 
             try {
                 if (menuNumber >= 1 && menuNumber <= 3) {
-                    LoginCheck.checkLogin(menuData.getCurrentUser());
-                    switch (menuNumber) {
-                        case 1:
-                            StoreMenu.displayStoreMenu(menuData);
-                            break;
-                        case 2:
-                            BasketMenu.displayBasketMenu(menuData);
-                            break;
-                        case 3:
-                            ProfileMenu.displayProfileMenu(menuData);
-                            break;
-                    }
+                    LoginCheck.checkLogin(CurrentDataSingleton.getInstance().getCurrentUser());
+                    MenuManager.getInstance().displaySelectedMenu(menuNumber);
                 } else {
                     switch (menuNumber) {
                         case 4:
-                            LoginMenu.displayLoginMenu(menuData);
+                            MenuManager.getInstance().displaySelectedMenu(menuNumber);
                             break;
                         case 5:
-                            return;
+                            exit = true;
+                            break;
                     }
                 }
             } catch (NotLoggedInException | IOException | NonExistentProductId exception) {
                 exception.printStackTrace();
             }
-        } while (true);
+        } while (!exit);
+    }
+
+    @Override
+    public int getMenuID() {
+        return 0;
     }
 }

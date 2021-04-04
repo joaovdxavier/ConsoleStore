@@ -1,15 +1,12 @@
 package testdata;
 
-import datamanagment.DataUtil;
-import dataobjects.DataObject;
+import datamanagment.CurrentDataSingleton;
+import datamanagment.DataIOUtil;
 import dataobjects.Product;
 import dataobjects.User;
 import enums.DataTypes;
 import enums.UserRole;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 
 public class DataFactory {
     private static String name = "Product #%s";
@@ -27,19 +24,13 @@ public class DataFactory {
 
     private static String password = "User%spassword";
 
-    public ArrayList<DataObject> generateData(DataTypes dataType, int count) throws IOException {
-        ArrayList<DataObject> dataObjects = new ArrayList<>();
-
+    public void generateData(DataTypes dataType, int count) throws IOException {
         for (int i = 0; i < count; i++) {
-            dataObjects.add(getDataObject(dataType));
+           generateDataObject(dataType);
         }
-
-        return dataObjects;
     }
 
-    public DataObject getDataObject(DataTypes dataType) throws IOException {
-        DataObject newDataObject ;
-
+    public void generateDataObject(DataTypes dataType) throws IOException {
         switch (dataType) {
             case PRODUCT:
                 Product newProduct = new Product();
@@ -47,10 +38,10 @@ public class DataFactory {
                 newProduct.setName(String.format(name, productId));
                 newProduct.setDescription(String.format(description, productId));
                 newProduct.setPrice(productId * 10);
-                DataUtil.writeProduct(newProduct);
-                newDataObject = newProduct;
+                DataIOUtil.writeProduct(newProduct);
+                CurrentDataSingleton.getInstance().addProduct(newProduct);
                 break;
-            default:
+            case USER:
                 User newUser = new User();
                 int userId = newUser.getId();
                 if (userId % 2 == 0) {
@@ -65,10 +56,9 @@ public class DataFactory {
                     newUser.setEmail(String.format(adminEmail, userId));
                 }
                 newUser.setPassword(String.format(password, userId));
-                DataUtil.writeUser(newUser);
-                newDataObject = newUser;
+                DataIOUtil.writeUser(newUser);
+                CurrentDataSingleton.getInstance().addUser(newUser);
                 break;
         }
-        return newDataObject;
     }
 }
