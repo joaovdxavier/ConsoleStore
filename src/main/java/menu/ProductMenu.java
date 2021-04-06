@@ -1,48 +1,56 @@
 package menu;
 
-import datamanagment.CurrentDataSingleton;
+import datamanagment.DataStoreManager;
+import enums.MenuNames;
 import exceptions.NonExistentProductId;
 import exceptions.NotLoggedInException;
 import inpututils.InputUtil;
 import dataobjects.Product;
+
 import java.io.IOException;
 
 public class ProductMenu implements MenuItem {
+    private static int productId;
+
     @Override
     public void displayMenu() throws NonExistentProductId, IOException, NotLoggedInException {
-        Product currentProduct = null;
-        int productId = CurrentDataSingleton.getInstance().getCurrentProductId();
-
-        for (Product product : CurrentDataSingleton.getInstance().getProducts()) {
-            if (product.getId() == productId) {
-                currentProduct = product;
-                break;
-            }
-        }
+        Product currentProduct = findProduct(productId);
 
         if (currentProduct == null) {
             throw new NonExistentProductId();
         } else {
-            System.out.println("Product ID: " + currentProduct.getId());
-            System.out.println("Product name: " + currentProduct.getName());
-            System.out.println("Product description: " + currentProduct.getDescription());
-            System.out.println("Product price: " + currentProduct.getPrice());
+            System.out.println(currentProduct);
             System.out.println("Type 1 to add a product to the basket.");
             System.out.println("Type 2 to return to menu.");
 
             int paragraph;
             do {
-                paragraph = InputUtil.getInt();
+                paragraph = InputUtil.getIntFromConsole();
                 if (paragraph == 1) {
-                    CurrentDataSingleton.getInstance().setCurrentProduct(currentProduct);
-                    MenuManager.getInstance().displaySelectedMenu(7);
+                    ProductAddingMenu.displayMenuWithProduct(currentProduct);
                 }
             } while (paragraph != 1 && paragraph != 2);
         }
     }
 
+    public static Product findProduct(int productId) throws IOException, NotLoggedInException, NonExistentProductId {
+        Product foundProduct = null;
+        for (Product product : DataStoreManager.getInstance().getProducts()) {
+            if (product.getId() == productId) {
+                foundProduct = product;
+                break;
+            }
+        }
+        return  foundProduct;
+    }
+
+    public static void displayMenuWithProductId(int productId) throws NotLoggedInException, NonExistentProductId, IOException {
+        ProductMenu.productId = productId;
+        MenuManager.getInstance().displaySelectedMenu(MenuNames.PRODUCT);
+    }
+
     @Override
-    public int getMenuID() {
-        return 5;
+    public MenuNames getMenuName() {
+        return MenuNames.PRODUCT;
     }
 }

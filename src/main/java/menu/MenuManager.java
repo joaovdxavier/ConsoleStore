@@ -1,18 +1,24 @@
 package menu;
 
+import enums.MenuNames;
 import exceptions.NonExistentProductId;
 import exceptions.NotLoggedInException;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MenuManager {
-    private Map<Integer, MenuItem> menuItems;
     private static MenuManager instance;
+    private MainMenu mainMenu;
+    private BasketMenu basketMenu;
+    private DataGenerationMenu dataGenerationMenu;
+    private LoginMenu loginMenu;
+    private ProductMenu productMenu;
+    private ProfileMenu profileMenu;
+    private StoreMenu storeMenu;
+    private ProductAddingMenu productAddingMenu;
+    private RegistrationMenu registrationMenu;
+    private AuthenticationMenu authenticationMenu;
 
-    private MenuManager() {
-        fillMenuItems();
-    }
+    private MenuManager() {}
 
     public static MenuManager getInstance() {
         if (instance == null) {
@@ -21,32 +27,52 @@ public class MenuManager {
         return instance;
     }
 
-    public void displaySelectedMenu(int menuId) throws IOException, NotLoggedInException, NonExistentProductId {
-        MenuItem currentMenuItem = menuItems.get(menuId);
-        currentMenuItem.displayMenu();
-    }
-
-    private void fillMenuItems(){
-        MainMenu mainMenu = new MainMenu();
-        BasketMenu basketMenu = new BasketMenu();
-        DataGenerationMenu dataGenerationMenu = new DataGenerationMenu();
-        LoginMenu loginMenu = new LoginMenu();
-        ProductMenu productMenu = new ProductMenu();
-        ProfileMenu profileMenu = new ProfileMenu();
-        StoreMenu storeMenu = new StoreMenu();
-        ProductAddingMenu productAddingMenu = new ProductAddingMenu();
-        RegistrationMenu registrationMenu = new RegistrationMenu();
-
-        menuItems = new HashMap<>();
-        menuItems.put(mainMenu.getMenuID(), mainMenu);
-        menuItems.put(basketMenu.getMenuID(), basketMenu);
-        menuItems.put(dataGenerationMenu.getMenuID(), dataGenerationMenu);
-        menuItems.put(loginMenu.getMenuID(), loginMenu);
-        menuItems.put(productMenu.getMenuID(), productMenu);
-        menuItems.put(profileMenu.getMenuID(), profileMenu);
-        menuItems.put(storeMenu.getMenuID(), storeMenu);
-        menuItems.put(storeMenu.getMenuID(), storeMenu);
-        menuItems.put(productAddingMenu.getMenuID(), productAddingMenu);
-        menuItems.put(registrationMenu.getMenuID(), registrationMenu);
+    public void displaySelectedMenu(MenuNames menuName) throws NotLoggedInException, NonExistentProductId, IOException {
+        MenuItem menuItemToDisplay;
+        switch (menuName) {
+            case MAIN:
+                if (mainMenu == null) mainMenu = new MainMenu();
+                menuItemToDisplay = mainMenu;
+                break;
+            case STORE:
+                if (storeMenu == null) storeMenu = new StoreMenu();
+                menuItemToDisplay = storeMenu;
+                break;
+            case BASKET:
+                if (basketMenu == null) basketMenu = new BasketMenu();
+                menuItemToDisplay = basketMenu;
+                break;
+            case PROFILE:
+                if (profileMenu == null) profileMenu = new ProfileMenu();
+                menuItemToDisplay = profileMenu;
+                break;
+            case LOGIN:
+                if (loginMenu == null) loginMenu = new LoginMenu();
+                menuItemToDisplay = loginMenu;
+                break;
+            case PRODUCT_ADDING:
+                if (productAddingMenu == null) productAddingMenu = new ProductAddingMenu();
+                menuItemToDisplay = productAddingMenu;
+                break;
+            case REGISTRATION:
+                if (registrationMenu == null) registrationMenu = new RegistrationMenu();
+                menuItemToDisplay = registrationMenu;
+                break;
+            case PRODUCT:
+                if (productMenu == null) productMenu = new ProductMenu();
+                menuItemToDisplay = productMenu;
+                break;
+            case DATA_GENERATION:
+                if (dataGenerationMenu == null) dataGenerationMenu = new DataGenerationMenu();
+                menuItemToDisplay = dataGenerationMenu;
+                break;
+            case AUTHENTICATION:
+                if (authenticationMenu == null) authenticationMenu = new AuthenticationMenu();
+                menuItemToDisplay = authenticationMenu;
+                break;
+            default:
+                menuItemToDisplay = null;
+        }
+        menuItemToDisplay.displayMenu();
     }
 }

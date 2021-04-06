@@ -1,9 +1,11 @@
 package menu;
 
-import datamanagment.CurrentDataSingleton;
+import datamanagment.DataBasketManager;
+import datamanagment.DataStoreManager;
 import datamanagment.DataIOUtil;
 import dataobjects.User;
-import enums.UserRole;
+import enums.MenuNames;
+import enums.UserRoles;
 import exceptions.NonExistentProductId;
 import exceptions.NotLoggedInException;
 import inpututils.InputUtil;
@@ -12,46 +14,44 @@ import java.io.IOException;
 public class RegistrationMenu implements MenuItem {
     @Override
     public void displayMenu() throws IOException, NotLoggedInException, NonExistentProductId {
-
         int menuParagraph;
-        System.out.println("There are no users with entered email: ");
         System.out.println("Do you wanna create a new account?");
         System.out.println("1. Create an account");
         System.out.println("2. Back to the Main menu");
 
         do {
-            menuParagraph = InputUtil.getInt();
+            menuParagraph = InputUtil.getIntFromConsole();
         } while (menuParagraph != 1 && menuParagraph != 2);
 
         if (menuParagraph == 1) {
             System.out.println("Creating a new user.");
             System.out.println("Enter your email: ");
-            String email = InputUtil.getString();
+            String email = InputUtil.getStringFromConsole();
             System.out.println("Enter your name: ");
-            String name = InputUtil.getString();
+            String name = InputUtil.getStringFromConsole();
             System.out.println("Enter your last name: ");
-            String lastName = InputUtil.getString();
+            String lastName = InputUtil.getStringFromConsole();
             int role;
             System.out.println("Choose your role: \n" +
                     "1. User \n" +
                     "2. Admin \n");
             do {
-                role = InputUtil.getInt();
+                role = InputUtil.getIntFromConsole();
             } while (role != 1 && role != 2);
-            UserRole userRole = role == 1 ? UserRole.USER : UserRole.ADMIN;
+            UserRoles userRoles = role == 1 ? UserRoles.USER : UserRoles.ADMIN;
             System.out.println("Enter your password: ");
-            String password = InputUtil.getString();
+            String password = InputUtil.getStringFromConsole();
 
-            User newUser = new User(name, lastName, userRole, email, password);
-            CurrentDataSingleton.getInstance().getUsers().add(newUser);
+            User newUser = new User(name, lastName, userRoles, email, password);
+            DataStoreManager.getInstance().addUser(newUser);
             DataIOUtil.writeUser(newUser);
-            CurrentDataSingleton.getInstance().getUserBasket().clear();
+            DataBasketManager.getInstance().getUserBasket().clear();
             System.out.println("Your account have been successfully created and stored in our base! ");
         }
     }
 
     @Override
-    public int getMenuID() {
-        return 8;
+    public MenuNames getMenuName() {
+        return MenuNames.REGISTRATION;
     }
 }

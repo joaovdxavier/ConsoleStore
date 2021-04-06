@@ -1,11 +1,11 @@
 package testdata;
 
-import datamanagment.CurrentDataSingleton;
+import datamanagment.DataStoreManager;
 import datamanagment.DataIOUtil;
 import dataobjects.Product;
 import dataobjects.User;
 import enums.DataTypes;
-import enums.UserRole;
+import enums.UserRoles;
 import java.io.IOException;
 
 public class DataFactory {
@@ -14,24 +14,24 @@ public class DataFactory {
 
     private static String userName = "UserName%s";
     private static String userLastName = "UserLastName%s";
-    private static UserRole userRole = UserRole.USER;
+    private static UserRoles userRoles = UserRoles.USER;
     private static String userEmail = "user%s@mail.com";
 
     private static String adminName = "AdminName%s";
     private static String adminLastName = "AdminLastName%s";
-    private static UserRole adminRole = UserRole.ADMIN;
+    private static UserRoles adminRole = UserRoles.ADMIN;
     private static String adminEmail = "admin%s@mail.com";
 
     private static String password = "User%spassword";
 
-    public void generateData(DataTypes dataType, int count) throws IOException {
+    public void generateData(DataTypes dataTypes, int count) throws IOException {
         for (int i = 0; i < count; i++) {
-           generateDataObject(dataType);
+           generateDataObject(dataTypes);
         }
     }
 
-    public void generateDataObject(DataTypes dataType) throws IOException {
-        switch (dataType) {
+    public void generateDataObject(DataTypes dataTypes) throws IOException {
+        switch (dataTypes) {
             case PRODUCT:
                 Product newProduct = new Product();
                 int productId = newProduct.getId();
@@ -39,7 +39,7 @@ public class DataFactory {
                 newProduct.setDescription(String.format(description, productId));
                 newProduct.setPrice(productId * 10);
                 DataIOUtil.writeProduct(newProduct);
-                CurrentDataSingleton.getInstance().addProduct(newProduct);
+                DataStoreManager.getInstance().addProduct(newProduct);
                 break;
             case USER:
                 User newUser = new User();
@@ -47,7 +47,7 @@ public class DataFactory {
                 if (userId % 2 == 0) {
                     newUser.setName(String.format(userName, userId));
                     newUser.setLastName(String.format(userLastName, userId));
-                    newUser.setRole(userRole);
+                    newUser.setRole(userRoles);
                     newUser.setEmail(String.format(userEmail, userId));
                 } else {
                     newUser.setName(String.format(adminName, userId));
@@ -57,7 +57,7 @@ public class DataFactory {
                 }
                 newUser.setPassword(String.format(password, userId));
                 DataIOUtil.writeUser(newUser);
-                CurrentDataSingleton.getInstance().addUser(newUser);
+                DataStoreManager.getInstance().addUser(newUser);
                 break;
         }
     }

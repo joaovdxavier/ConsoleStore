@@ -1,7 +1,7 @@
 package dataobjects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import enums.UserRole;
+import enums.UserRoles;
 
 public class User implements DataObject {
 
@@ -10,7 +10,7 @@ public class User implements DataObject {
         this.id = User.countID;
     }
 
-    public User(String name, String lastName, UserRole role, String email, String password) {
+    public User(String name, String lastName, UserRoles role, String email, String password) {
         this.name = name;
         this.lastName = lastName;
         this.role = role;
@@ -29,7 +29,7 @@ public class User implements DataObject {
     private String lastName;
 
     @JsonProperty("Role")
-    private UserRole role;
+    private UserRoles role;
 
     @JsonProperty("Email")
     private String email;
@@ -48,7 +48,7 @@ public class User implements DataObject {
         return lastName;
     }
 
-    public UserRole getRole() {
+    public UserRoles getRole() {
         return role;
     }
 
@@ -76,7 +76,7 @@ public class User implements DataObject {
         this.lastName = lastName;
     }
 
-    public void setRole(UserRole role) {
+    public void setRole(UserRoles role) {
         this.role = role;
     }
 
@@ -90,5 +90,16 @@ public class User implements DataObject {
 
     public static void setCountID(int countID) {
         User.countID = countID;
+    }
+
+    @Override
+    public String toString() {
+        return "User" +
+                "name: '" + name + '\'' +
+                "lastname: '" + lastName + '\'' +
+                "role: " + role +
+                "email: '" + email + '\'' +
+                "password: '" + password + '\'' +
+                "id: " + id;
     }
 }

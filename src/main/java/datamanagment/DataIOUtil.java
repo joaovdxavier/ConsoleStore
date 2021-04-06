@@ -1,7 +1,6 @@
 package datamanagment;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dataobjects.DataObject;
 import enums.DataTypes;
 import dataobjects.Product;
 import dataobjects.User;

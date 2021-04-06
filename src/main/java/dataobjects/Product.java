@@ -74,6 +74,14 @@ public class Product implements Comparable<Product>, DataObject {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "Product " +
+                "name: '" + name + '\n' +
+                "price: " + price + '\n' +
+                "description: '" + description + '\n' +
+                "id: " + id;
+    }
 
     @Override
     public int compareTo(Product o) {
