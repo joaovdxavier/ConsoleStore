@@ -24,7 +24,6 @@ public class ProductAddingMenu implements MenuItem {
        } else {
            System.out.println("Incorrect count of products. Product wasn't added to the basket.");
        }
-
     }
 
     public static void displayMenuWithProduct(Product productToAdd) throws NotLoggedInException, NonExistentProductId, IOException {
