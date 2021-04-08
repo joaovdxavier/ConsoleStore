@@ -1,7 +1,8 @@
 package exceptions;
 
 public class NotLoggedInException extends Exception {
+    private static String message = "You can't watch this until you login.";
     public String toString() {
-        return "You can't watch this until you login.";
+        return message;
     }
 }

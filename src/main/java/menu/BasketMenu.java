@@ -7,9 +7,13 @@ import exceptions.NonExistentProductId;
 import exceptions.NotLoggedInException;
 import inpututils.InputUtil;
 
+import javax.xml.transform.Source;
 import java.io.IOException;
 
 public class BasketMenu implements MenuItem {
+    private static String productShortInfo = "Product name: %s; Count: %s.";
+    private static String countInfo = "Total cost of items in the basket: %s";
+
     static double countPrice;
 
     @Override
@@ -25,7 +29,7 @@ public class BasketMenu implements MenuItem {
                 try {
                     DataStoreManager.getInstance().getProducts().forEach(product -> {
                         if (product.getId() == id) {
-                            System.out.println("Product name: " + product.getName() + " Count: " + count);
+                            System.out.println(String.format(productShortInfo, product.getName(), count));
                             countPrice += product.getPrice() * count;
                         }
                     });
@@ -33,7 +37,7 @@ public class BasketMenu implements MenuItem {
                     exception.printStackTrace();
                 }
             });
-            System.out.println("Total cost of items in the basket: " + countPrice);
+            System.out.println(String.format(countInfo, countPrice));
         }
 
         int paragraph;
@@ -42,8 +46,12 @@ public class BasketMenu implements MenuItem {
                     "2. Type 2 to return to Main menu\n");
             paragraph = InputUtil.getIntFromConsole();
             if (paragraph == 1) {
-                DataBasketManager.getInstance().getUserBasket().clear();
-                System.out.println("Basket was successfully cleared! ");
+                if (DataBasketManager.getInstance().getUserBasket().isEmpty()) {
+                    System.out.println("Your basket is already empty.");
+                } else {
+                    DataBasketManager.getInstance().getUserBasket().clear();
+                    System.out.println("Basket was successfully cleared! ");
+                }
                 return;
             } else if (paragraph == 2) {
                 return;

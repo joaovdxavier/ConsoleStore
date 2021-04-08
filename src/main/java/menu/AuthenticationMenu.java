@@ -3,25 +3,36 @@ package menu;
 import datamanagment.DataStoreManager;
 import dataobjects.User;
 import enums.MenuNames;
+import exceptions.AlreadyLoggedIn;
 import exceptions.NonExistentProductId;
 import exceptions.NotLoggedInException;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class AuthenticationMenu implements MenuItem {
+    private static String greetingsMessage = "You entered the correct email and password. \nHello %s %s !";
+    private static String errorMassage = "Incorrect email or password.";
+
     private static String email, password;
     private static ArrayList<User> users;
 
     @Override
-    public void displayMenu() throws IOException, NotLoggedInException, NonExistentProductId {
+    public void displayMenu() throws IOException {
+        try {
+            User currentUser = DataStoreManager.getInstance().getCurrentUser();
+            if (currentUser != null && currentUser.getEmail().equalsIgnoreCase(email)) {
+                throw new AlreadyLoggedIn();
+            }
+        }catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
         User userToLogin = findUser();
         if (userToLogin != null) {
-            System.out.println("You entered the correct email and password. \n" +
-                    "Hello " + userToLogin.getName() + " " + userToLogin.getLastName());
+            System.out.println(String.format(greetingsMessage, userToLogin.getName(),userToLogin.getLastName()));
             DataStoreManager.getInstance().setCurrentUser(userToLogin);
         } else {
-            System.out.println("Incorrect email or password.");
+            System.out.println(errorMassage);
         }
     }
 
@@ -30,7 +41,8 @@ public class AuthenticationMenu implements MenuItem {
         AuthenticationMenu.users = users;
         AuthenticationMenu.email = email;
         AuthenticationMenu.password = password;
-        MenuManager.getInstance().displaySelectedMenu(MenuNames.AUTHENTICATION);
+        AuthenticationMenu authenticationMenu = new AuthenticationMenu();
+        MenuManager.getInstance().displaySelectedMenu(authenticationMenu);
     }
 
     private static User findUser() {

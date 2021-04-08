@@ -32,12 +32,12 @@ public class DataBasketManager {
         if (userBasket.containsKey(productToAdd.getId())) {
             int previousCount = userBasket.get(productToAdd.getId());
             int newCount = previousCount + count;
-            if (newCount >= 0 && newCount < 100000) {
+            if (newCount >= 1 && newCount < 100000) {
                 userBasket.put(productToAdd.getId(), newCount);
                 wasAdded = true;
             }
         } else {
-            if (count >= 0 && count < 100000) {
+            if (count >= 1 && count < 100000) {
                 userBasket.put(productToAdd.getId(), count);
                 wasAdded = true;
             }

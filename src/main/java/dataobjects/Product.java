@@ -3,6 +3,7 @@ package dataobjects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Product implements Comparable<Product>, DataObject {
+    private static String productInformation = "Product name: %s; id: %s; price: %s; description: %s.";
 
     public Product() {
         this.countID++;
@@ -76,11 +77,7 @@ public class Product implements Comparable<Product>, DataObject {
 
     @Override
     public String toString() {
-        return "Product " +
-                "name: '" + name + '\n' +
-                "price: " + price + '\n' +
-                "description: '" + description + '\n' +
-                "id: " + id;
+        return String.format(productInformation, name, id, price, description);
     }
 
     @Override

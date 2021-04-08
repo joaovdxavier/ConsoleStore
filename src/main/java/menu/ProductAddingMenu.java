@@ -12,11 +12,11 @@ import java.io.IOException;
 public class ProductAddingMenu implements MenuItem {
     private static Product productToAdd;
 
+    private static String chooseString = "How many of %s do you wanna add to basket? (from 1 to 100000)";
+
     @Override
     public void displayMenu() throws IOException, NotLoggedInException, NonExistentProductId {
-        System.out.println("How many of " +
-                productToAdd.getName() +
-                " do you wanna add to basket? (from 1 to 100000)");
+        System.out.println(String.format(chooseString, productToAdd.getName()));
         int count;
         count = InputUtil.getIntFromConsole();
        if (DataBasketManager.getInstance().addProductToBasket(productToAdd, count)) {
@@ -28,7 +28,8 @@ public class ProductAddingMenu implements MenuItem {
 
     public static void displayMenuWithProduct(Product productToAdd) throws NotLoggedInException, NonExistentProductId, IOException {
         ProductAddingMenu.productToAdd = productToAdd;
-        MenuManager.getInstance().displaySelectedMenu(MenuNames.PRODUCT_ADDING);
+        ProductAddingMenu productAddingMenu = new ProductAddingMenu();
+        MenuManager.getInstance().displaySelectedMenu(productAddingMenu);
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class ProfileMenu implements MenuItem {
     @Override
-    public void displayMenu() throws NotLoggedInException, IOException {
+    public void displayMenu() throws IOException {
         System.out.println(DataStoreManager.getInstance().getCurrentUser());
     }
 

@@ -4,8 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import enums.UserRoles;
 
 public class User implements DataObject {
+    private static String userInformation = "User name: %s; lastname: %s; role: %s; email: %s; password: ***; id: %s";
 
-    public User(){
+    public User() {
         User.countID++;
         this.id = User.countID;
     }
@@ -94,12 +95,6 @@ public class User implements DataObject {
 
     @Override
     public String toString() {
-        return "User" +
-                "name: '" + name + '\'' +
-                "lastname: '" + lastName + '\'' +
-                "role: " + role +
-                "email: '" + email + '\'' +
-                "password: '" + password + '\'' +
-                "id: " + id;
+        return String.format(userInformation, name, lastName, role, email, password, id);
     }
 }

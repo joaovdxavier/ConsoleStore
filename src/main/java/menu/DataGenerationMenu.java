@@ -11,18 +11,20 @@ import java.io.IOException;
 public class DataGenerationMenu implements MenuItem {
     private static DataTypes dataTypeToGenerate = null;
 
+    private static String chooseString = "Seems like your %s list is empty, do you wanna generate some data?\n1. Yeas\n2. No";
+    private static String countChoose = "How many of %s do you wanna generate? (from 1 to 999)";
+
     @Override
     public void displayMenu()  throws IOException {
         if (dataTypeToGenerate != null) {
-            System.out.println(
-                    "Seems like your " + dataTypeToGenerate
-                            + " list is empty, do you wanna generate some data?\n" +
-                            "1. Yeas\n" +
-                            "2. No\n");
+            System.out.println(String.format(chooseString, dataTypeToGenerate));
             int paragraph = InputUtil.getIntFromConsole();
             if (paragraph == 1) {
-                System.out.println("How many of " + dataTypeToGenerate + " do you wanna generate?");
-                int count = InputUtil.getIntFromConsole();
+                System.out.println(String.format(countChoose, dataTypeToGenerate));
+                int count = 0;
+                do {
+                    count = InputUtil.getIntFromConsole();
+                } while (count < 1 || count > 999);
                 DataFactory dataFactory = new DataFactory();
                 dataFactory.generateData(dataTypeToGenerate, count);
             }
@@ -33,7 +35,8 @@ public class DataGenerationMenu implements MenuItem {
 
     public static void chooseType(DataTypes dataType) throws NotLoggedInException, NonExistentProductId, IOException {
         dataTypeToGenerate = dataType;
-        MenuManager.getInstance().displaySelectedMenu(MenuNames.DATA_GENERATION);
+        DataGenerationMenu dataGenerationMenu = new DataGenerationMenu();
+        MenuManager.getInstance().displaySelectedMenu(dataGenerationMenu);
     }
 
     @Override

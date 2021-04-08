@@ -6,35 +6,35 @@ import datamanagment.DataIOUtil;
 import dataobjects.User;
 import enums.MenuNames;
 import enums.UserRoles;
+import exceptions.EmailIsAlreadyUsed;
 import exceptions.NonExistentProductId;
 import exceptions.NotLoggedInException;
 import inpututils.InputUtil;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class RegistrationMenu implements MenuItem {
     @Override
     public void displayMenu() throws IOException, NotLoggedInException, NonExistentProductId {
         int menuParagraph;
-        System.out.println("Do you wanna create a new account?");
-        System.out.println("1. Create an account");
-        System.out.println("2. Back to the Main menu");
+        System.out.println("Do you wanna create a new account?\n1. Create an account\n2. Back to the Main menu");
 
         do {
             menuParagraph = InputUtil.getIntFromConsole();
         } while (menuParagraph != 1 && menuParagraph != 2);
 
         if (menuParagraph == 1) {
-            System.out.println("Creating a new user.");
-            System.out.println("Enter your email: ");
+            System.out.println("Creating a new user.\nEnter your email:");
             String email = InputUtil.getStringFromConsole();
+             if (!CheckEmailAvailability(email)) {
+                 return;
+             }
             System.out.println("Enter your name: ");
             String name = InputUtil.getStringFromConsole();
             System.out.println("Enter your last name: ");
             String lastName = InputUtil.getStringFromConsole();
             int role;
-            System.out.println("Choose your role: \n" +
-                    "1. User \n" +
-                    "2. Admin \n");
+            System.out.println("Choose your role: \n1. User \n2. Admin \n");
             do {
                 role = InputUtil.getIntFromConsole();
             } while (role != 1 && role != 2);
@@ -48,6 +48,24 @@ public class RegistrationMenu implements MenuItem {
             DataBasketManager.getInstance().getUserBasket().clear();
             System.out.println("Your account have been successfully created and stored in our base! ");
         }
+    }
+
+    private static boolean CheckEmailAvailability(String email) throws IOException, NotLoggedInException, NonExistentProductId {
+        boolean availability = true;
+        ArrayList<User> users = DataStoreManager.getInstance().getUsers();
+        try {
+            if (users != null) {
+                for (User user: users) {
+                    if (user.getEmail().equalsIgnoreCase(email)) {
+                        availability = false;
+                        throw new EmailIsAlreadyUsed();
+                    }
+                }
+            }
+        } catch (EmailIsAlreadyUsed emailIsAlreadyUsed) {
+            emailIsAlreadyUsed.printStackTrace();
+        }
+        return availability;
     }
 
     @Override

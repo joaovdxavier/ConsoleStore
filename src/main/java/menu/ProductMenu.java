@@ -46,7 +46,8 @@ public class ProductMenu implements MenuItem {
 
     public static void displayMenuWithProductId(int productId) throws NotLoggedInException, NonExistentProductId, IOException {
         ProductMenu.productId = productId;
-        MenuManager.getInstance().displaySelectedMenu(MenuNames.PRODUCT);
+        ProductMenu productMenu = new ProductMenu();
+        MenuManager.getInstance().displaySelectedMenu(productMenu);
     }
 
     @Override

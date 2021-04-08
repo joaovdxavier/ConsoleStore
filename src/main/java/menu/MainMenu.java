@@ -14,13 +14,7 @@ public class MainMenu implements MenuItem {
         boolean exit = false;
         do {
             System.out.println(
-                    "Choose one of the menu paragraphs:\n" +
-                            "1. Store\n" +
-                            "2. Basket\n" +
-                            "3. Profile\n" +
-                            "4. Login\n" +
-                            "5. Registration\n" +
-                            "6. Exit\n");
+                    "Choose one of the menu paragraphs:\n1. Store\n2. Basket\n3. Profile\n4. Login\n5. Registration\n6. Exit\n");
 
             menuNumber = InputUtil.getIntFromConsole();
 
@@ -29,22 +23,27 @@ public class MainMenu implements MenuItem {
                     LoginCheck.checkLogin(DataStoreManager.getInstance().getCurrentUser());
                     switch (menuNumber){
                         case 1:
-                            MenuManager.getInstance().displaySelectedMenu(MenuNames.STORE);
+                            StoreMenu storeMenu = new StoreMenu();
+                            MenuManager.getInstance().displaySelectedMenu(storeMenu);
                             break;
                         case 2:
-                            MenuManager.getInstance().displaySelectedMenu(MenuNames.BASKET);
+                            BasketMenu basketMenu = new BasketMenu();
+                            MenuManager.getInstance().displaySelectedMenu(basketMenu);
                             break;
                         case 3:
-                            MenuManager.getInstance().displaySelectedMenu(MenuNames.PROFILE);
+                            ProfileMenu profileMenu = new ProfileMenu();
+                            MenuManager.getInstance().displaySelectedMenu(profileMenu);
                             break;
                     }
                 } else {
                     switch (menuNumber) {
                         case 4:
-                            MenuManager.getInstance().displaySelectedMenu(MenuNames.LOGIN);
+                            LoginMenu loginMenu = new LoginMenu();
+                            MenuManager.getInstance().displaySelectedMenu(loginMenu);
                             break;
                         case 5:
-                            MenuManager.getInstance().displaySelectedMenu(MenuNames.REGISTRATION);
+                            RegistrationMenu registrationMenu = new RegistrationMenu();
+                            MenuManager.getInstance().displaySelectedMenu(registrationMenu);
                             break;
                         case 6:
                             System.out.println("Buy! See you later, Space Cowboy!");

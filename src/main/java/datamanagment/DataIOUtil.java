@@ -19,15 +19,17 @@ public class DataIOUtil {
     private static String resourcesDir = ".\\src\\Main\\resources";
     private static String usersDir = ".\\src\\Main\\resources\\users";
     private static String productsDir = ".\\src\\Main\\resources\\products";
+    private static String productFileName = ".\\src\\Main\\resources\\products\\id%s.json";
+    private static String userFileName = ".\\src\\Main\\resources\\users\\user%s.json";
 
 
     public static void writeProduct(Product product) throws IOException {
-        String productFileName = ".\\src\\Main\\resources\\products\\id" + product.getId() + ".json";
+        String productFileName = String.format(DataIOUtil.productFileName, product.getId());
         writeFile(productsDir, new File(productFileName), product);
     }
 
     public static void writeUser(User user) throws IOException {
-        String userFileName = ".\\src\\Main\\resources\\users\\user" + user.getId() + ".json";
+        String userFileName = String.format(DataIOUtil.userFileName, user.getId());
         writeFile(usersDir, new File(userFileName), user);
     }
 
