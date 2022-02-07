@@ -16,11 +16,11 @@ import java.util.ArrayList;
 public class DataIOUtil {
     private static ArrayList<User> users = new ArrayList<>();
     private static ArrayList<Product> products = new ArrayList<>();
-    private static String resourcesDir = ".\\src\\Main\\resources";
-    private static String usersDir = ".\\src\\Main\\resources\\users";
-    private static String productsDir = ".\\src\\Main\\resources\\products";
-    private static String productFileName = ".\\src\\Main\\resources\\products\\id%s.json";
-    private static String userFileName = ".\\src\\Main\\resources\\users\\user%s.json";
+    private static String resourcesDir = "./src/main/resources";
+    private static String usersDir = "./src/main/resources/users";
+    private static String productsDir = "./src/main/resources/products";
+    private static String productFileName = "./src/main/resources/products/id%s.json";
+    private static String userFileName = "./src/main/resources/users/user%s.json";
 
 
     public static void writeProduct(Product product) throws IOException {

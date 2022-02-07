@@ -60,7 +60,7 @@ public class AuthenticationMenu implements MenuItem {
     }
 
     private static boolean checkPassword(User user) {
-        return user.getEmail().equals(password);
+        return user.getPassword().equals(password);
     }
 
     @Override

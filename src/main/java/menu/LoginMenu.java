@@ -20,7 +20,7 @@ public class LoginMenu implements MenuItem {
         System.out.println("Enter password:");
         password = InputUtil.getStringFromConsole();
 
-        AuthenticationMenu.displayMenuWithUserData(password, email, users);
+        AuthenticationMenu.displayMenuWithUserData(email, password, users);
     }
 
     @Override
