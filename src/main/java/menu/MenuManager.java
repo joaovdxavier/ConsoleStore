@@ -5,6 +5,8 @@ import exceptions.NotLoggedInException;
 import java.io.IOException;
 
 public class MenuManager {
+    //Pontos: 1
+    //Renan
     private static MenuManager instance;
 
     private MenuManager() {}

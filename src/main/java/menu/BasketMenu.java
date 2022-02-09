@@ -11,6 +11,8 @@ import javax.xml.transform.Source;
 import java.io.IOException;
 
 public class BasketMenu implements MenuItem {
+    //Pontos: 3
+    //Lucas
     private static String productShortInfo = "Product name: %s; Count: %s.";
     private static String countInfo = "Total cost of items in the basket: %s";
 

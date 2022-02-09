@@ -9,6 +9,8 @@ import testdata.DataFactory;
 import java.io.IOException;
 
 public class DataGenerationMenu implements MenuItem {
+    //Pontos: 2
+    //Renan
     private static DataTypes dataTypeToGenerate = null;
 
     private static String chooseString = "Seems like your %s list is empty, do you wanna generate some data?\n1. Yeas\n2. No";

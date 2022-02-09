@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class DataStoreManager {
+    //Pontos: 3
+    //Lucas
     private User currentUser;
     private ArrayList<User> users;
     private ArrayList<Product> products;

@@ -3,6 +3,8 @@ package inpututils;
 import java.util.Scanner;
 
 public class InputUtil {
+    //Pontos: 2
+    //João
     private static String wrongValueError = "Wrong interred value. Only integer allowed.";
     private static String wrongTypeError = "Incorrect interred type. Try again.";
     public static int getIntFromConsole() {

@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class AuthenticationMenu implements MenuItem {
+    //Pontos: 3
+    //Lucas
     private static String greetingsMessage = "You entered the correct email and password. \nHello %s %s !";
     private static String errorMassage = "Incorrect email or password.";
 

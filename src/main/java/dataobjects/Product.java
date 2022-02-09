@@ -3,6 +3,8 @@ package dataobjects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Product implements Comparable<Product>, DataObject {
+    //Pontos: 1
+    //Renan
     private static String productInformation = "Product name: %s; id: %s; price: %s; description: %s.";
 
     public Product() {

@@ -5,6 +5,8 @@ import dataobjects.Product;
 import java.util.HashMap;
 
 public class DataBasketManager {
+    //Pontos: 2
+    //Lucas
     private static DataBasketManager instance;
     private HashMap<Integer, Integer> userBasket;
 

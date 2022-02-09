@@ -9,6 +9,8 @@ import enums.UserRoles;
 import java.io.IOException;
 
 public class DataFactory {
+    //Pontos: 3
+    //Renan
     private static String name = "Product #%s";
     private static String description = "Product #%s description";
 

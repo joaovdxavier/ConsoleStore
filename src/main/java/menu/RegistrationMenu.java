@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class RegistrationMenu implements MenuItem {
+    //Pontos: 3
+    //João
     @Override
     public void displayMenu() throws IOException, NotLoggedInException, NonExistentProductId {
         int menuParagraph;

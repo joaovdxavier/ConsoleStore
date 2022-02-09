@@ -10,6 +10,8 @@ import dataobjects.Product;
 import java.io.IOException;
 
 public class ProductMenu implements MenuItem {
+    //Pontos: 3
+    //Renan
     private static int productId;
 
     @Override

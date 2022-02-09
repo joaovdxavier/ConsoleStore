@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import enums.UserRoles;
 
 public class User implements DataObject {
+    //Pontos: 1
+    //Renan
     private static String userInformation = "User name: %s; lastname: %s; role: %s; email: %s; password: ***; id: %s";
 
     public User() {

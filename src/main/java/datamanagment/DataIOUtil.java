@@ -14,6 +14,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class DataIOUtil {
+    //Pontos: 5
+    //João
     private static ArrayList<User> users = new ArrayList<>();
     private static ArrayList<Product> products = new ArrayList<>();
     private static String resourcesDir = "./src/main/resources";

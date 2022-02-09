@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class StoreMenu implements MenuItem {
+    //Pontos: 2
+    //Renan
     private static String productShortInfo = "Product id: %s; Product name: %s";
 
     @Override

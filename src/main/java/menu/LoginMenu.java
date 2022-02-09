@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class LoginMenu implements MenuItem {
+    //Pontos: 1
+    //Lucas
     @Override
     public void displayMenu() throws NotLoggedInException, IOException, NonExistentProductId {
         String email, password;
