@@ -12,10 +12,10 @@ import java.util.ArrayList;
 public class StoreMenu implements MenuItem {
     //Pontos: 2
     //Renan
-    private static String productShortInfo = "Product id: %s; Product name: %s";
+    private static /*@ spec_public non_null @*/ String productShortInfo = "Product id: %s; Product name: %s";
 
     @Override
-    public void displayMenu() throws NotLoggedInException, NonExistentProductId, IOException {
+    public /*@ pure @*/ void displayMenu() throws NotLoggedInException, NonExistentProductId, IOException {
         ArrayList<Product> products = DataStoreManager.getInstance().getProducts();
 
         System.out.println("Product list.");
@@ -36,8 +36,11 @@ public class StoreMenu implements MenuItem {
         }
     }
 
+    /*@ assignable \nothing;
+    @ ensures \result == MenuNames.STORE; 
+    @*/
     @Override
-    public MenuNames getMenuName() {
+    public /*@ pure @*/ MenuNames getMenuName() {
         return MenuNames.STORE;
     }
 }
