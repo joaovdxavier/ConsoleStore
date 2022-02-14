@@ -36,7 +36,9 @@ public class DataGenerationMenu implements MenuItem {
     }
 
        
-    /*@ assignable dataType @*/
+    /*@ assignable dataTypeToGenerate; 
+    @ ensures dataTypeToGenerate == dataType;
+    @*/
     public static void chooseType( /*@ non_null @*/ DataTypes dataType) throws NotLoggedInException, NonExistentProductId, IOException {
         dataTypeToGenerate = dataType;
         DataGenerationMenu dataGenerationMenu = new DataGenerationMenu();
