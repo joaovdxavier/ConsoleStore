@@ -12,10 +12,11 @@ import java.io.IOException;
 public class ProductMenu implements MenuItem {
     //Pontos: 3
     //Renan
-    private static int productId;
+    private static /*@ spec_public nullable @*/ int productId;
 
+    /*@ requires productId != null @*/
     @Override
-    public void displayMenu() throws NonExistentProductId, IOException, NotLoggedInException {
+    public /*@ pure @*/ void displayMenu() throws NonExistentProductId, IOException, NotLoggedInException {
         Product currentProduct = findProduct(productId);
 
         if (currentProduct == null) {
@@ -35,7 +36,7 @@ public class ProductMenu implements MenuItem {
         }
     }
 
-    public static Product findProduct(int productId) throws IOException, NotLoggedInException, NonExistentProductId {
+    public static /*@ pure @*/ Product findProduct( /*@ non_null @*/ int productId) throws IOException, NotLoggedInException, NonExistentProductId {
         Product foundProduct = null;
         for (Product product : DataStoreManager.getInstance().getProducts()) {
             if (product.getId() == productId) {
@@ -46,14 +47,17 @@ public class ProductMenu implements MenuItem {
         return  foundProduct;
     }
 
-    public static void displayMenuWithProductId(int productId) throws NotLoggedInException, NonExistentProductId, IOException {
+    /*@ assignable ProductMenu.productId; 
+    @ ensures ProductMenu.productId == productId;
+    @*/
+    public static void displayMenuWithProductId( /*@ non_null @*/ int productId) throws NotLoggedInException, NonExistentProductId, IOException {
         ProductMenu.productId = productId;
         ProductMenu productMenu = new ProductMenu();
         MenuManager.getInstance().displaySelectedMenu(productMenu);
     }
 
     @Override
-    public MenuNames getMenuName() {
+    public /*@ pure @*/ MenuNames getMenuName() {
         return MenuNames.PRODUCT;
     }
 }
