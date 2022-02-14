@@ -5,14 +5,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Product implements Comparable<Product>, DataObject {
     //Pontos: 1
     //Renan
-    private static String productInformation = "Product name: %s; id: %s; price: %s; description: %s.";
+    private static /*@ spec_public non_null @*/ String productInformation = "Product name: %s; id: %s; price: %s; description: %s.";
 
+    /*@ assignable this.countID, this.id;
+    @ ensures this.id == this.countID; 
+    @ ensures this.countID == \old(this.countID)+1; 
+    @*/
     public Product() {
         this.countID++;
         this.id = countID;
     }
 
-    public Product(String name, double price, String description) {
+    /*@ assignable this.countID, this.name, this.price, this.description, this.id;
+    @ ensures this.id == this.countID; 
+    @ ensures this.name == name; 
+    @ ensures this.price == price; 
+    @ ensures this.description == description; 
+    @ ensures this.countID == \old(this.countID)+1; 
+    @*/
+    public Product( /*@ non_null @*/ String name, /*@ non_null @*/ double price, /*@ non_null @*/ String description) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -23,67 +34,99 @@ public class Product implements Comparable<Product>, DataObject {
 
 
     @JsonProperty("countID")
-    private static int countID = 0;
+    private static /*@ spec_public non_null @*/ int countID = 0;
 
     @JsonProperty("Name")
-    private String name;
+    private /*@ spec_public nullable @*/ String name;
 
     @JsonProperty("Price")
-    private double price;
+    private /*@ spec_public nullable @*/ double price;
 
     @JsonProperty("Description")
-    private String description;
+    private /*@ spec_public nullable @*/ String description;
 
     @JsonProperty("ID")
-    private int id;
+    private /*@ spec_public nullable @*/ int id;
+    
+    //@ public invariant 0 <= countID;
 
-    public String getName() {
+    /*@ assignable \nothing;
+    @ ensures \result == name; 
+    @*/
+    public /*@ pure @*/ String getName() {
         return name;
     }
 
-    public double getPrice() {
+    /*@ assignable \nothing;
+    @ ensures \result == price; 
+    @*/
+    public /*@ pure @*/ double getPrice() {
         return price;
     }
 
-    public String getDescription() {
+    /*@ assignable \nothing;
+    @ ensures \result == description; 
+    @*/
+    public /*@ pure @*/ String getDescription() {
         return description;
     }
 
-    public int getId() {
+    /*@ assignable \nothing;
+    @ ensures \result == id; 
+    @*/
+    public /*@ pure @*/ int getId() {
         return id;
     }
 
-    public static int getCountID() {
+    /*@ assignable \nothing;
+    @ ensures \result == countID; 
+    @*/
+    public static /*@ pure @*/ int getCountID() {
         return countID;
     }
 
-    public static void setCountID(int countID) {
+    /*@ assignable Product.countID; 
+    @ ensures Product.countID == countID;
+    @*/
+    public static void setCountID( /*@ non_null @*/ int countID) {
         Product.countID = countID;
     }
 
-    public void setId(int id) {
+    /*@ assignable this.id; 
+    @ ensures this.id == id;
+    @*/
+    public void setId( /*@ non_null @*/ int id) {
         this.id = id;
     }
 
-    public void setName(String name) {
+    /*@ assignable this.name; 
+    @ ensures this.name == name;
+    @*/
+    public void setName( /*@ non_null @*/ String name) {
         this.name = name;
     }
 
-    public void setPrice(double price) {
+    /*@ assignable this.price; 
+    @ ensures this.price == price;
+    @*/
+    public void setPrice( /*@ non_null @*/ double price) {
         this.price = price;
     }
 
-    public void setDescription(String description) {
+    /*@ assignable this.description; 
+    @ ensures this.description == description;
+    @*/
+    public void setDescription( /*@ non_null @*/ String description) {
         this.description = description;
     }
 
     @Override
-    public String toString() {
+    public /*@ pure @*/ String toString() {
         return String.format(productInformation, name, id, price, description);
     }
 
     @Override
-    public int compareTo(Product o) {
+    public /*@ pure @*/ int compareTo( /*@ non_null @*/ Product o) {
         return this.id - o.id;
     }
 }
