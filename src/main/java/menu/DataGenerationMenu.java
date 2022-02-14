@@ -11,13 +11,13 @@ import java.io.IOException;
 public class DataGenerationMenu implements MenuItem {
     //Pontos: 2
     //Renan
-    private static DataTypes dataTypeToGenerate = null;
+    private static /*@ spec_public nullable @*/ DataTypes dataTypeToGenerate = null;
 
-    private static String chooseString = "Seems like your %s list is empty, do you wanna generate some data?\n1. Yeas\n2. No";
-    private static String countChoose = "How many of %s do you wanna generate? (from 1 to 999)";
+    private static /*@ spec_public non_null @*/ String chooseString = "Seems like your %s list is empty, do you wanna generate some data?\n1. Yeas\n2. No";
+    private static /*@ spec_public non_null @*/ String countChoose = "How many of %s do you wanna generate? (from 1 to 999)";
 
     @Override
-    public void displayMenu()  throws IOException {
+    public /*@ pure @*/ void displayMenu()  throws IOException {
         if (dataTypeToGenerate != null) {
             System.out.println(String.format(chooseString, dataTypeToGenerate));
             int paragraph = InputUtil.getIntFromConsole();
@@ -35,14 +35,16 @@ public class DataGenerationMenu implements MenuItem {
         }
     }
 
-    public static void chooseType(DataTypes dataType) throws NotLoggedInException, NonExistentProductId, IOException {
+       
+    /*@ assignable dataType @*/
+    public static void chooseType( /*@ non_null @*/ DataTypes dataType) throws NotLoggedInException, NonExistentProductId, IOException {
         dataTypeToGenerate = dataType;
         DataGenerationMenu dataGenerationMenu = new DataGenerationMenu();
         MenuManager.getInstance().displaySelectedMenu(dataGenerationMenu);
     }
 
     @Override
-    public MenuNames getMenuName() {
+    public /*@ pure @*/ MenuNames getMenuName() {
         return MenuNames.DATA_GENERATION;
     }
 }
