@@ -14,8 +14,8 @@ public class ProductMenu implements MenuItem {
     //Renan
     private static /*@ spec_public nullable @*/ int productId;
 
-    /*@ requires productId != null @*/
     @Override
+    /*@ requires productId != null; @*/
     public /*@ pure @*/ void displayMenu() throws NonExistentProductId, IOException, NotLoggedInException {
         Product currentProduct = findProduct(productId);
 
