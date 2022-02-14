@@ -36,10 +36,11 @@ public class StoreMenu implements MenuItem {
         }
     }
 
+    
+    @Override
     /*@ assignable \nothing;
     @ ensures \result == MenuNames.STORE; 
     @*/
-    @Override
     public /*@ pure @*/ MenuNames getMenuName() {
         return MenuNames.STORE;
     }
