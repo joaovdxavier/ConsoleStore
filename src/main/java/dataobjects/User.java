@@ -6,14 +6,27 @@ import enums.UserRoles;
 public class User implements DataObject {
     //Pontos: 1
     //Renan
-    private static String userInformation = "User name: %s; lastname: %s; role: %s; email: %s; password: ***; id: %s";
+    private static /*@ spec_public non_null @*/ String userInformation = "User name: %s; lastname: %s; role: %s; email: %s; password: ***; id: %s";
 
+    /*@ assignable User.countID, this.id;
+    @ ensures this.id == User.countID; 
+    @ ensures User.countID == \old(User.countID)+1; 
+    @*/
     public User() {
         User.countID++;
         this.id = User.countID;
     }
 
-    public User(String name, String lastName, UserRoles role, String email, String password) {
+    /*@ assignable this.countID, this.name, this.lastName, this.role, this.id, this.email, this.password;
+    @ ensures this.id == this.countID; 
+    @ ensures this.name == name; 
+    @ ensures this.role == role; 
+    @ ensures this.email == email;
+    @ ensures this.password == password; 
+    @ ensures this.lastName == lastName; 
+    @ ensures this.countID == \old(this.countID)+1; 
+    @*/
+    public User( /*@ non_null @*/ String name, /*@ non_null @*/ String lastName, /*@ non_null @*/ UserRoles role, /*@ non_null @*/ String email, /*@ non_null @*/ String password) {
         this.name = name;
         this.lastName = lastName;
         this.role = role;
@@ -23,80 +36,121 @@ public class User implements DataObject {
         this.id = User.countID;
     }
 
-    private static int countID = 0;
+    private static /*@ spec_public non_null @*/ int countID = 0;
 
     @JsonProperty("Name")
-    private String name;
+    private /*@ spec_public nullable @*/ String name;
 
     @JsonProperty("Last Name")
-    private String lastName;
+    private /*@ spec_public nullable @*/ String lastName;
 
     @JsonProperty("Role")
-    private UserRoles role;
+    private /*@ spec_public nullable @*/ UserRoles role;
 
     @JsonProperty("Email")
-    private String email;
+    private /*@ spec_public nullable @*/ String email;
 
     @JsonProperty("Password")
-    private String password;
+    private /*@ spec_public nullable @*/ String password;
 
     @JsonProperty("Id")
-    private int id;
+    private /*@ spec_public nullable @*/ int id;
 
-    public String getName() {
+    //@ public invariant 0 <= countID;
+    
+    /*@ assignable \nothing;
+    @ ensures \result == name; 
+    @*/
+    public /*@ pure @*/ String getName() {
         return name;
     }
 
-    public String getLastName() {
+    /*@ assignable \nothing;
+    @ ensures \result == lastName; 
+    @*/
+    public /*@ pure @*/ String getLastName() {
         return lastName;
     }
 
-    public UserRoles getRole() {
+    /*@ assignable \nothing;
+    @ ensures \result == role; 
+    @*/
+    public /*@ pure @*/ UserRoles getRole() {
         return role;
     }
 
-    public String getEmail() {
+    /*@ assignable \nothing;
+    @ ensures \result == email; 
+    @*/
+    public /*@ pure @*/ String getEmail() {
         return email;
     }
 
-    public String getPassword() {
+    /*@ assignable \nothing;
+    @ ensures \result == password; 
+    @*/
+    public /*@ pure @*/ String getPassword() {
         return password;
     }
 
-    public int getId() {
+    /*@ assignable \nothing;
+    @ ensures \result == id; 
+    @*/
+    public /*@ pure @*/ int getId() {
         return id;
     }
 
-    public static int getCountID() {
+    /*@ assignable \nothing;
+    @ ensures \result == countID; 
+    @*/
+    public static /*@ pure @*/ int getCountID() {
         return countID;
     }
 
-    public void setName(String name) {
+    /*@ assignable this.name; 
+    @ ensures this.name == name;
+    @*/
+    public void setName( /*@ non_null @*/ String name) {
         this.name = name;
     }
 
-    public void setLastName(String lastName) {
+    /*@ assignable this.lastName; 
+    @ ensures this.lastName == lastName;
+    @*/
+    public void setLastName( /*@ non_null @*/ String lastName) {
         this.lastName = lastName;
     }
 
-    public void setRole(UserRoles role) {
+    /*@ assignable this.role; 
+    @ ensures this.role == role;
+    @*/
+    public void setRole( /*@ non_null @*/ UserRoles role) {
         this.role = role;
     }
 
-    public void setEmail(String email) {
+    /*@ assignable this.email; 
+    @ ensures this.email == email;
+    @*/
+    public void setEmail( /*@ non_null @*/ String email) {
         this.email = email;
     }
 
-    public void setPassword(String password) {
+    /*@ assignable this.password; 
+    @ ensures this.password == password;
+    @*/
+    public void setPassword( /*@ non_null @*/ String password) {
         this.password = password;
     }
 
-    public static void setCountID(int countID) {
+    /*@ assignable User.countID; 
+    @ ensures User.countID == countID;
+    @*/
+    public static void setCountID( /*@ non_null @*/ int countID) {
         User.countID = countID;
     }
 
     @Override
-    public String toString() {
+    public /*@ pure @*/ String toString() {
         return String.format(userInformation, name, lastName, role, email, password, id);
     }
 }
