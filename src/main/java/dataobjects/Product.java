@@ -23,15 +23,13 @@ public class Product implements Comparable<Product>, DataObject {
     @ ensures this.description == description; 
     @ ensures this.countID == \old(this.countID)+1; 
     @*/
-    public Product( /*@ non_null @*/ String name, /*@ non_null @*/ double price, /*@ non_null @*/ String description) {
+    public Product( /*@ non_null @*/ String name, double price, /*@ non_null @*/ String description) {
         this.name = name;
         this.price = price;
         this.description = description;
         this.countID++;
         this.id = countID;
     }
-
-
 
     @JsonProperty("countID")
     private static /*@ spec_public non_null @*/ int countID = 0;
@@ -50,7 +48,8 @@ public class Product implements Comparable<Product>, DataObject {
     
     //@ public invariant 0 <= countID;
 
-    /*@ assignable \nothing;
+    /*@ also
+    @ assignable \nothing;
     @ ensures \result == name; 
     @*/
     public /*@ pure @*/ String getName() {
@@ -71,7 +70,8 @@ public class Product implements Comparable<Product>, DataObject {
         return description;
     }
 
-    /*@ assignable \nothing;
+    /*@ also
+    @ assignable \nothing;
     @ ensures \result == id; 
     @*/
     public /*@ pure @*/ int getId() {
@@ -88,14 +88,14 @@ public class Product implements Comparable<Product>, DataObject {
     /*@ assignable Product.countID; 
     @ ensures Product.countID == countID;
     @*/
-    public static void setCountID( /*@ non_null @*/ int countID) {
+    public static void setCountID(int countID) {
         Product.countID = countID;
     }
 
     /*@ assignable this.id; 
     @ ensures this.id == id;
     @*/
-    public void setId( /*@ non_null @*/ int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -109,7 +109,7 @@ public class Product implements Comparable<Product>, DataObject {
     /*@ assignable this.price; 
     @ ensures this.price == price;
     @*/
-    public void setPrice( /*@ non_null @*/ double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

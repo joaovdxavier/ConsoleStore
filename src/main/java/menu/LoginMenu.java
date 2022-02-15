@@ -13,7 +13,10 @@ public class LoginMenu implements MenuItem {
     //Pontos: 1
     //Lucas
     @Override
-    public void displayMenu() throws NotLoggedInException, IOException, NonExistentProductId {
+    /*@ also
+    @ assignable \nothing;
+    @*/
+    public /*@ pure @*/ void displayMenu() throws NotLoggedInException, IOException, NonExistentProductId {
         String email, password;
         ArrayList<User> users = DataStoreManager.getInstance().getUsers();
         System.out.println("Login menu");
@@ -26,7 +29,11 @@ public class LoginMenu implements MenuItem {
     }
 
     @Override
-    public MenuNames getMenuName() {
+    /*@ also
+    @ assignable \nothing;
+    @ ensures \result == MenuNames.LOGIN;
+    @*/
+    public /*@ pure @*/ MenuNames getMenuName() {
         return MenuNames.LOGIN;
     }
 }

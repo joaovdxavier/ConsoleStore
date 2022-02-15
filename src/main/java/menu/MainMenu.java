@@ -11,7 +11,10 @@ public class MainMenu implements MenuItem {
     //Pontos: 3
     //Lucas
     @Override
-    public void displayMenu() {
+    /*@ also
+    @ assignable \nothing;
+    @*/
+    public /*@ pure @*/ void displayMenu() {
         int menuNumber;
         boolean exit = false;
         do {
@@ -60,7 +63,11 @@ public class MainMenu implements MenuItem {
     }
 
     @Override
-    public MenuNames getMenuName() {
+    /*@ also
+    @ assignable \nothing;
+    @ ensures \result == MenuNames.MAIN;
+    @*/
+    public /*@ pure @*/ MenuNames getMenuName() {
         return MenuNames.MAIN;
     }
 }

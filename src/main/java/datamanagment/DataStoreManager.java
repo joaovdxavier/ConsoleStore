@@ -12,17 +12,25 @@ import java.util.ArrayList;
 public class DataStoreManager {
     //Pontos: 3
     //Lucas
-    private User currentUser;
-    private ArrayList<User> users;
-    private ArrayList<Product> products;
-    private static DataStoreManager instance;
+    private /*@ spec_public nullable @*/ User currentUser;
+    private /*@ spec_public nullable @*/ ArrayList<User> users;
+    private /*@ spec_public nullable @*/ ArrayList<Product> products;
+    private /*@ spec_public nullable @*/ static DataStoreManager instance;
 
+    /*@ assignable currentUser, users, products;
+    @ ensures currentUser == null && users != null && products != null; 
+    @ signals_only IOException;
+    @*/
     private DataStoreManager() throws IOException {
         currentUser = null;
         users = DataIOUtil.getUsers();
         products = DataIOUtil.getProducts();
     }
 
+    /*@ assignable DataStoreManager.instance;
+    @ ensures DataStoreManager.instance != null;
+    @ ensures \result == DataStoreManager.instance;
+    @*/
     public static DataStoreManager getInstance() throws IOException {
         if (instance == null) {
             instance = new DataStoreManager();
@@ -30,10 +38,14 @@ public class DataStoreManager {
         return instance;
     }
 
-    public User getCurrentUser() {
+    //@ ensures \result == currentUser;
+    public /*@ pure @*/ User getCurrentUser() {
         return currentUser;
     }
 
+    /*@ assignable \nothing;
+    @ ensures \result == users;
+    @*/
     public ArrayList<User> getUsers() throws IOException, NotLoggedInException, NonExistentProductId {
         if (users.isEmpty()) {
             DataGenerationMenu.chooseType(DataTypes.USER);
@@ -41,33 +53,51 @@ public class DataStoreManager {
         return users;
     }
 
+    /*@ assignable \nothing;
+    @ ensures \result == products;
+    @*/
     public ArrayList<Product> getProducts() throws IOException, NotLoggedInException, NonExistentProductId {
         if (products.isEmpty()) {
-            DataGenerationMenu.chooseType(DataTypes.PRODUCT);
+            DataGenerationMenu.chooseType(DataTypes.PRODUCT); //assignable estará em Menu/DataGenerationMenu
         }
-        products.sort(Product::compareTo);
+        products.sort(Product::compareTo); //será descrito em dataobjects/Product
         return products;
     }
 
-    public void setCurrentUser(User currentUser) {
+    /*@ assignable currentUser;
+    @ ensures this.currentUser == currentUser;
+    @*/
+    public void setCurrentUser(/*@ nullable @*/ User currentUser) {
         this.currentUser = currentUser;
     }
 
-    public void setUsers(ArrayList<User> users) {
+    /*@ assignable users;
+    @ ensures this.users == users;
+    @*/
+    public void setUsers(/*@ nullable @*/ ArrayList<User> users) {
         this.users = users;
     }
 
-    public void setProducts(ArrayList<Product> products) {
+    /*@ assignable products;
+    @ ensures this.products == products;
+    @*/
+    public void setProducts(/*@ nullable @*/ ArrayList<Product> products) {
         this.products = products;
     }
 
-    public void addUser(User newUser) {
+    /*@ assignable users;
+    @ ensures (users != null) ==> users.size() > \old(users.size());
+    @*/
+    public void addUser(/*@ non_null @*/ User newUser) {
         if (users != null) {
             users.add(newUser);
         }
     }
 
-    public void addProduct(Product newProduct) {
+    /*@ assignable products;
+    @ ensures (products != null) ==> products.size() > \old(products.size());
+    @*/
+    public void addProduct(/*@ non_null @*/ Product newProduct) {
         if (products != null) {
             products.add(newProduct);
         }

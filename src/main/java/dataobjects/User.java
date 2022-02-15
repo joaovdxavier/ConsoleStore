@@ -58,7 +58,8 @@ public class User implements DataObject {
 
     //@ public invariant 0 <= countID;
     
-    /*@ assignable \nothing;
+    /*@ also
+    @ assignable \nothing;
     @ ensures \result == name; 
     @*/
     public /*@ pure @*/ String getName() {
@@ -93,7 +94,8 @@ public class User implements DataObject {
         return password;
     }
 
-    /*@ assignable \nothing;
+    /*@ also
+    @ assignable \nothing;
     @ ensures \result == id; 
     @*/
     public /*@ pure @*/ int getId() {
@@ -145,7 +147,7 @@ public class User implements DataObject {
     /*@ assignable User.countID; 
     @ ensures User.countID == countID;
     @*/
-    public static void setCountID( /*@ non_null @*/ int countID) {
+    public static void setCountID(int countID) {
         User.countID = countID;
     }
 

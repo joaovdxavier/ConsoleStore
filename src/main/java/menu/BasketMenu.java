@@ -13,12 +13,18 @@ import java.io.IOException;
 public class BasketMenu implements MenuItem {
     //Pontos: 3
     //Lucas
-    private static String productShortInfo = "Product name: %s; Count: %s.";
-    private static String countInfo = "Total cost of items in the basket: %s";
+    private /*@ spec_public non_null @*/ static String productShortInfo = "Product name: %s; Count: %s.";
+    private /*@ spec_public non_null @*/ static String countInfo = "Total cost of items in the basket: %s";
 
-    static double countPrice;
+    /*@ spec_public nullable @*/ static double countPrice;
 
     @Override
+    /*@ also
+    @   assignable BasketMenu.countPrice;
+    @ also
+    @   assignable BasketMenu.countPrice;
+    @   ensures BasketMenu.countPrice != \old(BasketMenu.countPrice);
+    @*/
     public void displayMenu() throws IOException {
         countPrice = 0;
 
@@ -62,7 +68,11 @@ public class BasketMenu implements MenuItem {
     }
 
     @Override
-    public MenuNames getMenuName() {
+    /*@ also
+    @ assignable \nothing;
+    @ ensures \result == MenuNames.BASKET;
+    @*/
+    public /*@ pure @*/ MenuNames getMenuName() {
         return MenuNames.BASKET;
     }
 }
