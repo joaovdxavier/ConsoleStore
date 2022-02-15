@@ -11,28 +11,28 @@ import java.io.IOException;
 public class DataFactory {
     //Pontos: 3
     //Renan
-    private static String name = "Product #%s";
-    private static String description = "Product #%s description";
+    private static /*@ spec_public non_null @*/ String name = "Product #%s";
+    private static /*@ spec_public non_null @*/ String description = "Product #%s description";
 
-    private static String userName = "UserName%s";
-    private static String userLastName = "UserLastName%s";
-    private static UserRoles userRoles = UserRoles.USER;
-    private static String userEmail = "user%s@mail.com";
+    private static /*@ spec_public non_null @*/ String userName = "UserName%s";
+    private static /*@ spec_public non_null @*/ String userLastName = "UserLastName%s";
+    private static /*@ spec_public non_null @*/ UserRoles userRoles = UserRoles.USER;
+    private static /*@ spec_public non_null @*/ String userEmail = "user%s@mail.com";
 
-    private static String adminName = "AdminName%s";
-    private static String adminLastName = "AdminLastName%s";
-    private static UserRoles adminRole = UserRoles.ADMIN;
-    private static String adminEmail = "admin%s@mail.com";
+    private static /*@ spec_public non_null @*/ String adminName = "AdminName%s";
+    private static /*@ spec_public non_null @*/ String adminLastName = "AdminLastName%s";
+    private static /*@ spec_public non_null @*/ UserRoles adminRole = UserRoles.ADMIN;
+    private static /*@ spec_public non_null @*/ String adminEmail = "admin%s@mail.com";
 
-    private static String password = "User%spassword";
+    private static /*@ spec_public non_null @*/ String password = "User%spassword";
 
-    public void generateData(DataTypes dataTypes, int count) throws IOException {
+    public /*@ pure @*/ void generateData( /*@ non_null @*/ DataTypes dataTypes, int count) throws IOException {
         for (int i = 0; i < count; i++) {
            generateDataObject(dataTypes);
         }
     }
 
-    public void generateDataObject(DataTypes dataTypes) throws IOException {
+    public /*@ pure @*/ void generateDataObject( /*@ non_null @*/ DataTypes dataTypes) throws IOException {
         switch (dataTypes) {
             case PRODUCT:
                 Product newProduct = new Product();
