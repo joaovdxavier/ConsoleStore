@@ -19,35 +19,58 @@ import com.eclipsesource.json.*;
 public class DataIOUtil {
     //Pontos: 5
     //João
-    private static ArrayList<User> users = new ArrayList<>();
-    private static ArrayList<Product> products = new ArrayList<>();
-    private static String resourcesDir = "./src/main/resources";
-    private static String usersDir = "./src/main/resources/users";
-    private static String productsDir = "./src/main/resources/products";
-    private static String productFileName = "./src/main/resources/products/id%s.json";
-    private static String userFileName = "./src/main/resources/users/user%s.json";
+	private static /*@ spec_public nullable @*/ ArrayList<User> users = new ArrayList<>();
+    private static /*@ spec_public nullable @*/ ArrayList<Product> products = new ArrayList<>();
+    private static /*@ spec_public non_null @*/ String resourcesDir = "./src/main/resources";
+    private static /*@ spec_public non_null @*/ String usersDir = "./src/main/resources/users";
+    private static /*@ spec_public non_null @*/ String productsDir = "./src/main/resources/products";
+    private static /*@ spec_public non_null @*/ String productFileName = "./src/main/resources/products/id%s.json";
+    private static /*@ spec_public non_null @*/ String userFileName = "./src/main/resources/users/user%s.json";
 
-
-    public static void writeProduct(Product product) throws IOException {
+    
+    /* @ requires product != null;
+    @ signals_only IOException;
+    */
+    public /*@ pure @*/ static void writeProduct(Product product) throws IOException {
         String productFileName = String.format(DataIOUtil.productFileName, product.getId());
         writeFile(productsDir, new File(productFileName), product.serialize());
     }
-
-    public static void writeUser(User user) throws IOException {
+    
+    /* @ requires user != null;
+    @ signals_only IOException;
+    */
+    public /*@ pure @*/ static void writeUser(User user) throws IOException {
         String userFileName = String.format(DataIOUtil.userFileName, user.getId());
         writeFile(usersDir, new File(userFileName), user.serialize());
     }
-
-    public static ArrayList<Product> getProducts() throws IOException {
+    
+    /* @ ensures \result == products;
+    @ signals_only IOException;
+    */
+    public /*@ pure @*/ static ArrayList<Product> getProducts() throws IOException {
         fillArrayList(DataTypes.PRODUCT);
         return products;
     }
-
-    public static ArrayList<User> getUsers() throws IOException {
+    
+    /* @ ensures \result == users;
+    @ signals_only IOException;
+    */
+    public /*@ pure @*/ static ArrayList<User> getUsers() throws IOException {
         fillArrayList(DataTypes.USER);
         return users;
     }
-
+    
+    /* @ requires dataTypes != null && dataTypes == DataTypes.USER;
+    @ assignable users;
+    @ ensures users == usersList ;
+    @ ensures products == \old(products);
+    @ also
+    @ requires dataTypes != null && dataTypes == DataTypes.PRODUCT;
+    @ assignable products;
+    @ ensures products == productsList;
+    @ ensures users == \old(users);
+    @ signals_only IOException;
+    */
     private static void fillArrayList(DataTypes dataTypes) throws IOException {
         ArrayList<User> usersList = new ArrayList<>();
         ArrayList<Product> productsList = new ArrayList<>();
@@ -89,15 +112,24 @@ public class DataIOUtil {
             }
         }
     }
-
-    private static void writeFile(String dir, File file, JsonObject object) throws IOException {
+    
+    /*
+    @ requires dir != null & file != null && object != null;
+    @ signals_only IOException;
+    */
+    private /*@ pure @*/ static void writeFile(String dir, File file, JsonObject object) throws IOException {
         createDir(dir);
         try (PrintWriter out = new PrintWriter(file)) {
             out.println(object.toString());
         }
     }
-
-    private static ArrayList<Path> getFilesList(String directoryPath) throws IOException {
+    
+    
+    /*@ requires directoryPath != null;
+    @ signals_only IOException;
+    @ ensures \result == filesList;
+   */
+    private /*@ pure @*/ static ArrayList<Path> getFilesList(String directoryPath) throws IOException {
         createDir(resourcesDir);
         createDir(usersDir);
         createDir(productsDir);
@@ -111,12 +143,19 @@ public class DataIOUtil {
         }
         return filesList;
     }
-
-    public static boolean dirExists(String dir) {
+    
+    /* @ requires dir != null; 
+     @ ensures \result == true || \result == false; 
+     @ */
+    public /*@ pure @*/ static boolean dirExists(String dir) {
         return (Files.isDirectory(Paths.get(dir)) || Files.exists(Paths.get(dir)));
     }
-
-    public static void createDir(String dir) throws IOException {
+    
+    /*@ requires dir != null;
+    @ signals_only IOException;
+    @ ensures (dirExists(dir) == false) ==> Files.createDirectory(path); 
+    @*/
+    public /*@ pure @*/ static void createDir(String dir) throws IOException {
         Path path = Paths.get(dir);
         if (!dirExists(dir)) {
             Files.createDirectory(path);

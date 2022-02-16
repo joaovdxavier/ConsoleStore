@@ -5,9 +5,13 @@ import java.util.Scanner;
 public class InputUtil {
     //Pontos: 2
     //João
-    private static String wrongValueError = "Wrong interred value. Only integer allowed.";
-    private static String wrongTypeError = "Incorrect interred type. Try again.";
-    public static int getIntFromConsole() {
+    private /*@ spec_public non_null @*/ static String wrongValueError = "Wrong interred value. Only integer allowed.";
+    private /*@ spec_public non_null @*/ static String wrongTypeError = "Incorrect interred type. Try again.";
+    
+    /*@  ensures \result == result;
+     @  signals_only Exception;
+     @*/
+    public /*@ pure @*/ static int getIntFromConsole() {
         String intValue = getStringFromConsole();
         int result = 0;
         try {
@@ -17,8 +21,11 @@ public class InputUtil {
         }
         return result;
     }
-
-    public static String getStringFromConsole() {
+    
+    /*@  ensures \result == x;
+    @  signals_only Exception;
+    @*/
+    public /*@ pure @*/ static String getStringFromConsole() {
         Scanner i = new Scanner(System.in);
         boolean out = false;
         String x = "";

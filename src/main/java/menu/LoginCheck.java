@@ -6,15 +6,18 @@ import dataobjects.User;
 public class LoginCheck {
     //Pontos: 1
     //João
-    /*
-        currentUser
-        current == null
-        NotLoggedInException
-
-        currentUser
-        current != null
-        @Nothing
-     */
+	/*@ public normal_behavior
+	@ 		requires currentUser != null;
+	@ 		assignable \nothing;
+	@ 		ensures \nothing;
+	@ also
+	@ 	public exceptional_behavior
+	@ 		requires currentUser == null;
+	@ 		assignable \nothing;
+	@ 		signals_only NotLoggedInException;
+	@ 		signals (DeathException e)
+	@ 		currentUser == null;
+	@*/
     public static void checkLogin(User currentUser) throws NotLoggedInException {
         if (currentUser == null) {
             throw new NotLoggedInException();

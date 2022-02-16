@@ -8,6 +8,10 @@ import java.io.IOException;
 public interface MenuItem {
     //Pontos: 1
     //João
+	
+	/*@
+	 @ signals_only IOException, NotLoggedInException, NonExistentProductId;
+	 @*/
     void displayMenu() throws IOException, NotLoggedInException, NonExistentProductId;
-    MenuNames getMenuName();
+    MenuNames /*@ pure @*/ getMenuName();
 }

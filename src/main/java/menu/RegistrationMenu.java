@@ -17,6 +17,9 @@ public class RegistrationMenu implements MenuItem {
     //Pontos: 3
     //João
     @Override
+    /*@ also
+    @ assignable \nothing;
+    @*/
     public void displayMenu() throws IOException, NotLoggedInException, NonExistentProductId {
         int menuParagraph;
         System.out.println("Do you wanna create a new account?\n1. Create an account\n2. Back to the Main menu");
@@ -51,7 +54,11 @@ public class RegistrationMenu implements MenuItem {
             System.out.println("Your account have been successfully created and stored in our base! ");
         }
     }
-
+    
+    /*@ requires email != null 
+    @ assignable \nothing;
+    @ ensures \result == availability;
+    @*/
     private static boolean CheckEmailAvailability(String email) throws IOException, NotLoggedInException, NonExistentProductId {
         boolean availability = true;
         ArrayList<User> users = DataStoreManager.getInstance().getUsers();
@@ -71,6 +78,9 @@ public class RegistrationMenu implements MenuItem {
     }
 
     @Override
+    /*@ also
+    @ ensures \result == MenuNames.REGISTRATION;
+    @*/
     public MenuNames getMenuName() {
         return MenuNames.REGISTRATION;
     }

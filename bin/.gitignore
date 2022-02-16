@@ -1,0 +1,10 @@
+# Eclipse
+.settings/
+.project
+.classpath
+
+# Other
+.idea/
+target/
+/target/
+/src/main/resources/
