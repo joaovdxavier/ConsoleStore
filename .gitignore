@@ -1,4 +1,6 @@
 .idea/
+bin/
 target/
 /target/
+/bin/
 /src/main/resources/
