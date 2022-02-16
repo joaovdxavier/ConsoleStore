@@ -1,6 +1,6 @@
 package dataobjects;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.eclipsesource.json.*;
 
 public class Product implements Comparable<Product>, DataObject {
     //Pontos: 1
@@ -31,19 +31,14 @@ public class Product implements Comparable<Product>, DataObject {
         this.id = countID;
     }
 
-    @JsonProperty("countID")
-    private static /*@ spec_public non_null @*/ int countID = 0;
+    private static /*@ spec_public nullable @*/ int countID = 0;
 
-    @JsonProperty("Name")
     private /*@ spec_public nullable @*/ String name;
 
-    @JsonProperty("Price")
     private /*@ spec_public nullable @*/ double price;
 
-    @JsonProperty("Description")
     private /*@ spec_public nullable @*/ String description;
 
-    @JsonProperty("ID")
     private /*@ spec_public nullable @*/ int id;
     
     //@ public invariant 0 <= countID;
@@ -128,5 +123,13 @@ public class Product implements Comparable<Product>, DataObject {
     @Override
     public /*@ pure @*/ int compareTo( /*@ non_null @*/ Product o) {
         return this.id - o.id;
+    }
+    
+    @Override
+    /*@ also
+    @ assignable \nothing;
+    @*/
+    public JsonObject serialize() {
+    	return Json.object().add("countID", this.countID).add("Name", this.name).add("Price", this.price).add("Description", this.description).add("ID", this.id);
     }
 }

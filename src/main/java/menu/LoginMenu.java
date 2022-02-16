@@ -31,7 +31,6 @@ public class LoginMenu implements MenuItem {
     @Override
     /*@ also
     @ assignable \nothing;
-    @ ensures \result == MenuNames.LOGIN;
     @*/
     public /*@ pure @*/ MenuNames getMenuName() {
         return MenuNames.LOGIN;

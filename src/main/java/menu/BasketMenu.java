@@ -70,7 +70,6 @@ public class BasketMenu implements MenuItem {
     @Override
     /*@ also
     @ assignable \nothing;
-    @ ensures \result == MenuNames.BASKET;
     @*/
     public /*@ pure @*/ MenuNames getMenuName() {
         return MenuNames.BASKET;

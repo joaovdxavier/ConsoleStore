@@ -1,8 +1,11 @@
 package dataobjects;
 
+import com.eclipsesource.json.*;
+
 public interface DataObject {
     //Pontos: 1
     //Renan
-    int /*@ pure @*/ getId();
-    String /*@ pure @*/ getName();
+    int getId();
+    String getName();
+    JsonObject serialize();
 }

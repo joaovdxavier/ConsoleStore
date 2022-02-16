@@ -65,7 +65,6 @@ public class MainMenu implements MenuItem {
     @Override
     /*@ also
     @ assignable \nothing;
-    @ ensures \result == MenuNames.MAIN;
     @*/
     public /*@ pure @*/ MenuNames getMenuName() {
         return MenuNames.MAIN;

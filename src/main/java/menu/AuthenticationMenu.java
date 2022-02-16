@@ -53,9 +53,6 @@ public class AuthenticationMenu implements MenuItem {
     }
 
     /*@ assignable \nothing;
-    @ ensures
-    @ (\forall int i; 0 <= i && i < users.size();
-    @         users[i].getEmail().equalsIgnoreCase(email) && checkPassword(users[i]) == users[i]) ==> \result;
     @*/
     private /*@ pure @*/ static User findUser() {
         User foundUser = null;
@@ -72,7 +69,6 @@ public class AuthenticationMenu implements MenuItem {
     }
 
     /*@ requires user.getPassword() != null;
-    @ ensures (user.getPassword() == password) ==> \result;
     @*/
     private /*@ pure @*/ static boolean checkPassword(/*@ non_null @*/ User user) {
         return user.getPassword().equals(password);
@@ -81,7 +77,6 @@ public class AuthenticationMenu implements MenuItem {
     @Override
     /*@ also
     @ assignable \nothing;
-    @ ensures \result == MenuNames.AUTHENTICATION;
     @*/
     public /*@ pure @*/ MenuNames getMenuName() {
         return MenuNames.AUTHENTICATION;

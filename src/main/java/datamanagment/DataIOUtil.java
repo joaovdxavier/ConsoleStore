@@ -1,17 +1,20 @@
 package datamanagment;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import enums.DataTypes;
+import enums.UserRoles;
 import dataobjects.Product;
 import dataobjects.User;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import com.eclipsesource.json.*;
 
 public class DataIOUtil {
     //Pontos: 5
@@ -27,12 +30,12 @@ public class DataIOUtil {
 
     public static void writeProduct(Product product) throws IOException {
         String productFileName = String.format(DataIOUtil.productFileName, product.getId());
-        writeFile(productsDir, new File(productFileName), product);
+        writeFile(productsDir, new File(productFileName), product.serialize());
     }
 
     public static void writeUser(User user) throws IOException {
         String userFileName = String.format(DataIOUtil.userFileName, user.getId());
-        writeFile(usersDir, new File(userFileName), user);
+        writeFile(usersDir, new File(userFileName), user.serialize());
     }
 
     public static ArrayList<Product> getProducts() throws IOException {
@@ -61,15 +64,18 @@ public class DataIOUtil {
             productsList = new ArrayList<>();
         }
 
-        ObjectMapper mapper = new ObjectMapper();
         if (!filesList.isEmpty()) {
             for (Path path : filesList) {
                 if (dataTypes == DataTypes.USER) {
-                    currentUser = mapper.readValue(new File(path.toString()), User.class);
+                	String s = new String(Files.readAllBytes(path));
+                	JsonObject object = Json.parse(s).asObject();
+                    currentUser = new User(object.get("Name").asString(), object.get("Last Name").asString(), UserRoles.valueOf(object.get("Role").asString()), object.get("Email").asString(), object.get("Password").asString());
                     usersList.add(currentUser);
                     if (currentUser.getId() > maxId) maxId = currentUser.getId();
                 } else if (dataTypes == DataTypes.PRODUCT) {
-                    currentProduct = mapper.readValue(new File(path.toString()), Product.class);
+                	String s = new String(Files.readAllBytes(path));
+                	JsonObject object = Json.parse(s).asObject();
+                    currentProduct = new Product(object.get("Name").asString(), object.get("Price").asDouble(), object.get("Description").asString());
                     productsList.add(currentProduct);
                     if (currentProduct.getId() > maxId) maxId = currentProduct.getId();
                 }
@@ -84,10 +90,11 @@ public class DataIOUtil {
         }
     }
 
-    private static void writeFile(String dir, File file, Object object) throws IOException {
+    private static void writeFile(String dir, File file, JsonObject object) throws IOException {
         createDir(dir);
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(file, object);
+        try (PrintWriter out = new PrintWriter(file)) {
+            out.println(object.toString());
+        }
     }
 
     private static ArrayList<Path> getFilesList(String directoryPath) throws IOException {

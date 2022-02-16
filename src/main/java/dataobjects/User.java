@@ -1,7 +1,7 @@
 package dataobjects;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import enums.UserRoles;
+import com.eclipsesource.json.*;
 
 public class User implements DataObject {
     //Pontos: 1
@@ -36,24 +36,18 @@ public class User implements DataObject {
         this.id = User.countID;
     }
 
-    private static /*@ spec_public non_null @*/ int countID = 0;
+    private static /*@ spec_public nullable @*/ int countID = 0;
 
-    @JsonProperty("Name")
     private /*@ spec_public nullable @*/ String name;
 
-    @JsonProperty("Last Name")
     private /*@ spec_public nullable @*/ String lastName;
 
-    @JsonProperty("Role")
     private /*@ spec_public nullable @*/ UserRoles role;
 
-    @JsonProperty("Email")
     private /*@ spec_public nullable @*/ String email;
 
-    @JsonProperty("Password")
     private /*@ spec_public nullable @*/ String password;
 
-    @JsonProperty("Id")
     private /*@ spec_public nullable @*/ int id;
 
     //@ public invariant 0 <= countID;
@@ -154,5 +148,13 @@ public class User implements DataObject {
     @Override
     public /*@ pure @*/ String toString() {
         return String.format(userInformation, name, lastName, role, email, password, id);
+    }
+    
+    @Override
+    /*@ also
+    @ assignable \nothing;
+    @*/
+    public JsonObject serialize() {
+    	return Json.object().add("Name", this.name).add("Last Name", this.lastName).add("Role", this.role.name()).add("Email", this.email).add("Password", this.password).add("ID", this.id);
     }
 }
