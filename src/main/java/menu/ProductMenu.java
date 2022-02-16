@@ -10,11 +10,12 @@ import dataobjects.Product;
 import java.io.IOException;
 
 public class ProductMenu implements MenuItem {
-    //Pontos: 3
-    //Renan
     private static /*@ spec_public nullable @*/ int productId;
 
     @Override
+    /*@ also
+    @ signals_only IOException, NotLoggedInException, NonExistentProductId;
+    @*/
     public /*@ pure @*/ void displayMenu() throws NonExistentProductId, IOException, NotLoggedInException {
         Product currentProduct = findProduct(productId);
 
@@ -35,6 +36,8 @@ public class ProductMenu implements MenuItem {
         }
     }
 
+    /*@ signals_only IOException, NotLoggedInException, NonExistentProductId;
+    @*/
     public static /*@ pure @*/ Product findProduct(int productId) throws IOException, NotLoggedInException, NonExistentProductId {
         Product foundProduct = null;
         for (Product product : DataStoreManager.getInstance().getProducts()) {
@@ -46,8 +49,9 @@ public class ProductMenu implements MenuItem {
         return  foundProduct;
     }
 
-    /*@ assignable ProductMenu.productId; 
+    /*@ assignable \everything;
     @ ensures ProductMenu.productId == productId;
+    @ signals_only IOException, NotLoggedInException, NonExistentProductId;
     @*/
     public static void displayMenuWithProductId(int productId) throws NotLoggedInException, NonExistentProductId, IOException {
         ProductMenu.productId = productId;
@@ -56,6 +60,9 @@ public class ProductMenu implements MenuItem {
     }
 
     @Override
+    /*@ also
+    @ assignable \nothing;
+    @*/
     public /*@ pure @*/ MenuNames getMenuName() {
         return MenuNames.PRODUCT;
     }

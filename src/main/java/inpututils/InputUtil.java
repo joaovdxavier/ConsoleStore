@@ -3,13 +3,10 @@ package inpututils;
 import java.util.Scanner;
 
 public class InputUtil {
-    //Pontos: 2
-    //João
     private /*@ spec_public non_null @*/ static String wrongValueError = "Wrong interred value. Only integer allowed.";
     private /*@ spec_public non_null @*/ static String wrongTypeError = "Incorrect interred type. Try again.";
     
-    /*@  ensures \result == result;
-     @  signals_only Exception;
+    /*@ signals_only Exception;
      @*/
     public /*@ pure @*/ static int getIntFromConsole() {
         String intValue = getStringFromConsole();
@@ -22,8 +19,7 @@ public class InputUtil {
         return result;
     }
     
-    /*@  ensures \result == x;
-    @  signals_only Exception;
+    /*@ signals_only Exception;
     @*/
     public /*@ pure @*/ static String getStringFromConsole() {
         Scanner i = new Scanner(System.in);

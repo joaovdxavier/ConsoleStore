@@ -4,11 +4,9 @@ import enums.UserRoles;
 import com.eclipsesource.json.*;
 
 public class User implements DataObject {
-    //Pontos: 1
-    //Renan
     private static /*@ spec_public non_null @*/ String userInformation = "User name: %s; lastname: %s; role: %s; email: %s; password: ***; id: %s";
 
-    /*@ assignable User.countID, this.id;
+    /*@ assignable \everything;
     @ ensures this.id == User.countID; 
     @ ensures User.countID == \old(User.countID)+1; 
     @*/
@@ -17,7 +15,7 @@ public class User implements DataObject {
         this.id = User.countID;
     }
 
-    /*@ assignable this.countID, this.name, this.lastName, this.role, this.id, this.email, this.password;
+    /*@ assignable \everything;
     @ ensures this.id == this.countID; 
     @ ensures this.name == name; 
     @ ensures this.role == role; 
@@ -138,8 +136,7 @@ public class User implements DataObject {
         this.password = password;
     }
 
-    /*@ assignable User.countID; 
-    @ ensures User.countID == countID;
+    /*@ ensures User.countID == countID;
     @*/
     public static void setCountID(int countID) {
         User.countID = countID;

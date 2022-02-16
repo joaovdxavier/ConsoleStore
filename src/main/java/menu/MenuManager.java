@@ -5,8 +5,6 @@ import exceptions.NotLoggedInException;
 import java.io.IOException;
 
 public class MenuManager {
-    //Pontos: 1
-    //Renan
     private static /*@ spec_public @*/ MenuManager instance;
 
     private /*@ pure @*/ MenuManager() {}
@@ -22,6 +20,8 @@ public class MenuManager {
         return instance;
     }
 
+    /*@ signals_only NotLoggedInException, NonExistentProductId, IOException;
+    @*/
     public /*@ pure @*/ void displaySelectedMenu(/*@ non_null @*/MenuItem menuItem) throws NotLoggedInException, NonExistentProductId, IOException {
         menuItem.displayMenu();
     }

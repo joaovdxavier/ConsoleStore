@@ -10,11 +10,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class StoreMenu implements MenuItem {
-    //Pontos: 2
-    //Renan
     private static /*@ spec_public non_null @*/ String productShortInfo = "Product id: %s; Product name: %s";
 
     @Override
+    /*@ also
+    @ signals_only IOException, NotLoggedInException, NonExistentProductId;
+    @*/
     public /*@ pure @*/ void displayMenu() throws NotLoggedInException, NonExistentProductId, IOException {
         ArrayList<Product> products = DataStoreManager.getInstance().getProducts();
 

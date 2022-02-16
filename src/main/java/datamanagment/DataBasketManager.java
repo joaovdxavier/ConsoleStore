@@ -5,8 +5,6 @@ import dataobjects.Product;
 import java.util.HashMap;
 
 public class DataBasketManager {
-    //Pontos: 2
-    //Lucas
     private /*@ spec_public nullable @*/ static DataBasketManager instance;
     private /*@ spec_public nullable @*/ HashMap<Integer, Integer> userBasket;
 
@@ -17,8 +15,8 @@ public class DataBasketManager {
         userBasket = new HashMap<>();
     }
 
-    /*@ assignable DataBasketManager.instance;
-    @ ensures \result == DataBasketManager.instance;
+    /*@ assignable instance;
+    @ ensures \result == instance;
     @*/
     public static DataBasketManager getInstance() {
         if (instance == null) {
@@ -34,18 +32,20 @@ public class DataBasketManager {
         return userBasket;
     }
 
-    /*@ assignable userBasket;
+    /*@ assignable this.userBasket;
     @ ensures this.userBasket == userBasket;
     @*/
     public void setUserBasket(HashMap<Integer, Integer> userBasket) {
         this.userBasket = userBasket;
     }
 
-    /*@   requires userBasket.containsKey(productToAdd.getId());
-    @   assignable userBasket;
-    @   ensures (count >= 1 && count < 100000) ==> \result;
-    @   ensures Integer.parseInt(userBasket.get(productToAdd.getId())) == \old(Integer.parseInt(userBasket.get(productToAdd.getId()))) + count;
+    /*@ public normal_behavior  
+    @     requires userBasket.containsKey(productToAdd.getId()) == true;
+    @     assignable userBasket;
+    @     ensures (count >= 1 && count < 100000) ==> \result;
+    @     ensures Integer.parseInt(userBasket.get(productToAdd.getId())) == \old(Integer.parseInt(userBasket.get(productToAdd.getId()))) + count;
     @ also
+    @   requires userBasket.containsKey(productToAdd.getId()) == false;
     @   assignable userBasket;
     @   ensures (count >= 1 && count < 100000) ==> \result;
     @*/

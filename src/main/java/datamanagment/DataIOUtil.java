@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import com.eclipsesource.json.*;
 
 public class DataIOUtil {
-    //Pontos: 5
-    //João
 	private static /*@ spec_public nullable @*/ ArrayList<User> users = new ArrayList<>();
     private static /*@ spec_public nullable @*/ ArrayList<Product> products = new ArrayList<>();
     private static /*@ spec_public non_null @*/ String resourcesDir = "./src/main/resources";
@@ -127,7 +125,6 @@ public class DataIOUtil {
     
     /*@ requires directoryPath != null;
     @ signals_only IOException;
-    @ ensures \result == filesList;
    */
     private /*@ pure @*/ static ArrayList<Path> getFilesList(String directoryPath) throws IOException {
         createDir(resourcesDir);
@@ -151,9 +148,9 @@ public class DataIOUtil {
         return (Files.isDirectory(Paths.get(dir)) || Files.exists(Paths.get(dir)));
     }
     
+    //ensures (dirExists(dir) == false) ==> Files.createDirectory(Paths.get(dir)); 
     /*@ requires dir != null;
     @ signals_only IOException;
-    @ ensures (dirExists(dir) == false) ==> Files.createDirectory(path); 
     @*/
     public /*@ pure @*/ static void createDir(String dir) throws IOException {
         Path path = Paths.get(dir);

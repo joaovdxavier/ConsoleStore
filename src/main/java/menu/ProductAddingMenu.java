@@ -10,8 +10,6 @@ import inpututils.InputUtil;
 import java.io.IOException;
 
 public class ProductAddingMenu implements MenuItem {
-    //Pontos: 2
-    //João
     private static /*@ spec_public nullable @*/ Product productToAdd;
 
     private static /*@ spec_public non_null @*/ String chooseString = "How many of %s do you wanna add to basket? (from 1 to 100000)";
@@ -19,6 +17,7 @@ public class ProductAddingMenu implements MenuItem {
     @Override
     /*@ also
     @ assignable \nothing;
+    @ signals_only NotLoggedInException, NonExistentProductId, IOException;
     @*/
     public void displayMenu() throws IOException, NotLoggedInException, NonExistentProductId {
         System.out.println(String.format(chooseString, productToAdd.getName()));
@@ -32,8 +31,9 @@ public class ProductAddingMenu implements MenuItem {
     }
     
     /*@ requires productToAdd != null;
-    @ assignable ProductAddingMenu.productToAdd;
+    @ assignable \everything;
     @ ensures ProductAddingMenu.productToAdd == productToAdd;
+    @ signals_only NotLoggedInException, NonExistentProductId, IOException;
     @*/
     public static void displayMenuWithProduct(Product productToAdd) throws NotLoggedInException, NonExistentProductId, IOException {
         ProductAddingMenu.productToAdd = productToAdd;
@@ -43,7 +43,7 @@ public class ProductAddingMenu implements MenuItem {
 
     @Override
     /*@ also
-    @ ensures \result == MenuNames.PRODUCT_ADDING;
+    @ assignable \nothing;
     @*/
     public MenuNames getMenuName() {
         return MenuNames.PRODUCT_ADDING;

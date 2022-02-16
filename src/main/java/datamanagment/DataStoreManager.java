@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class DataStoreManager {
-    //Pontos: 3
-    //Lucas
     private /*@ spec_public nullable @*/ User currentUser;
     private /*@ spec_public nullable @*/ ArrayList<User> users;
     private /*@ spec_public nullable @*/ ArrayList<Product> products;
@@ -27,9 +25,10 @@ public class DataStoreManager {
         products = DataIOUtil.getProducts();
     }
 
-    /*@ assignable DataStoreManager.instance;
-    @ ensures DataStoreManager.instance != null;
+    /*@ assignable instance;
+    @ ensures instance != null;
     @ ensures \result == DataStoreManager.instance;
+    @ signals_only IOException;
     @*/
     public static DataStoreManager getInstance() throws IOException {
         if (instance == null) {
@@ -45,6 +44,7 @@ public class DataStoreManager {
 
     /*@ assignable \nothing;
     @ ensures \result == users;
+    @ signals_only IOException, NotLoggedInException, NonExistentProductId;
     @*/
     public ArrayList<User> getUsers() throws IOException, NotLoggedInException, NonExistentProductId {
         if (users.isEmpty()) {
@@ -55,6 +55,7 @@ public class DataStoreManager {
 
     /*@ assignable \nothing;
     @ ensures \result == products;
+    @ signals_only IOException, NotLoggedInException, NonExistentProductId;
     @*/
     public ArrayList<Product> getProducts() throws IOException, NotLoggedInException, NonExistentProductId {
         if (products.isEmpty()) {
@@ -64,21 +65,21 @@ public class DataStoreManager {
         return products;
     }
 
-    /*@ assignable currentUser;
+    /*@ assignable this.currentUser;
     @ ensures this.currentUser == currentUser;
     @*/
     public void setCurrentUser(/*@ nullable @*/ User currentUser) {
         this.currentUser = currentUser;
     }
 
-    /*@ assignable users;
+    /*@ assignable this.users;
     @ ensures this.users == users;
     @*/
     public void setUsers(/*@ nullable @*/ ArrayList<User> users) {
         this.users = users;
     }
 
-    /*@ assignable products;
+    /*@ assignable this.products;
     @ ensures this.products == products;
     @*/
     public void setProducts(/*@ nullable @*/ ArrayList<Product> products) {

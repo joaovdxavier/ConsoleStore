@@ -11,19 +11,19 @@ import javax.xml.transform.Source;
 import java.io.IOException;
 
 public class BasketMenu implements MenuItem {
-    //Pontos: 3
-    //Lucas
     private /*@ spec_public non_null @*/ static String productShortInfo = "Product name: %s; Count: %s.";
     private /*@ spec_public non_null @*/ static String countInfo = "Total cost of items in the basket: %s";
 
     /*@ spec_public nullable @*/ static double countPrice;
 
     @Override
-    /*@ also
-    @   assignable BasketMenu.countPrice;
+    /*@ also 
+    @   assignable \everything; 
+    @   signals_only IOException;
     @ also
-    @   assignable BasketMenu.countPrice;
+    @   assignable \everything;
     @   ensures BasketMenu.countPrice != \old(BasketMenu.countPrice);
+    @   signals_only IOException;
     @*/
     public void displayMenu() throws IOException {
         countPrice = 0;

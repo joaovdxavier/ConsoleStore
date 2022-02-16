@@ -5,8 +5,8 @@ import menu.MenuManager;
 import java.io.IOException;
 
 public class Main {
-    //Pontos: 1
-    //Renan
+    /*@ signals_only IOException, NotLoggedInException, NonExistentProductId;
+    @*/
     public static /*@ pure @*/ void main(String[] args) throws NotLoggedInException, NonExistentProductId, IOException {
         MainMenu mainMenu = new MainMenu();
         MenuManager.getInstance().displaySelectedMenu(mainMenu);

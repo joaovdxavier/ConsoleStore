@@ -14,11 +14,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class RegistrationMenu implements MenuItem {
-    //Pontos: 3
-    //João
     @Override
     /*@ also
     @ assignable \nothing;
+    @ signals_only IOException, NotLoggedInException, NonExistentProductId;
     @*/
     public void displayMenu() throws IOException, NotLoggedInException, NonExistentProductId {
         int menuParagraph;
@@ -55,9 +54,9 @@ public class RegistrationMenu implements MenuItem {
         }
     }
     
-    /*@ requires email != null 
+    /*@ requires email != null; 
     @ assignable \nothing;
-    @ ensures \result == availability;
+    @ signals_only IOException, NotLoggedInException, NonExistentProductId;
     @*/
     private static boolean CheckEmailAvailability(String email) throws IOException, NotLoggedInException, NonExistentProductId {
         boolean availability = true;
@@ -79,7 +78,7 @@ public class RegistrationMenu implements MenuItem {
 
     @Override
     /*@ also
-    @ ensures \result == MenuNames.REGISTRATION;
+    @ assignable \nothing;
     @*/
     public MenuNames getMenuName() {
         return MenuNames.REGISTRATION;

@@ -9,8 +9,6 @@ import enums.UserRoles;
 import java.io.IOException;
 
 public class DataFactory {
-    //Pontos: 3
-    //Renan
     private static /*@ spec_public non_null @*/ String name = "Product #%s";
     private static /*@ spec_public non_null @*/ String description = "Product #%s description";
 
@@ -26,12 +24,16 @@ public class DataFactory {
 
     private static /*@ spec_public non_null @*/ String password = "User%spassword";
 
+    /*@ signals_only IOException;
+    @*/
     public /*@ pure @*/ void generateData( /*@ non_null @*/ DataTypes dataTypes, int count) throws IOException {
         for (int i = 0; i < count; i++) {
            generateDataObject(dataTypes);
         }
     }
 
+    /*@ signals_only IOException;
+    @*/
     public /*@ pure @*/ void generateDataObject( /*@ non_null @*/ DataTypes dataTypes) throws IOException {
         switch (dataTypes) {
             case PRODUCT:
