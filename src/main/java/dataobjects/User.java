@@ -16,13 +16,13 @@ public class User implements DataObject {
     }
 
     /*@ assignable \everything;
-    @ ensures this.id == this.countID; 
+    @ ensures this.id == User.countID; 
     @ ensures this.name == name; 
     @ ensures this.role == role; 
     @ ensures this.email == email;
     @ ensures this.password == password; 
     @ ensures this.lastName == lastName; 
-    @ ensures this.countID == \old(this.countID)+1; 
+    @ ensures User.countID == \old(User.countID)+1;
     @*/
     public User( /*@ non_null @*/ String name, /*@ non_null @*/ String lastName, /*@ non_null @*/ UserRoles role, /*@ non_null @*/ String email, /*@ non_null @*/ String password) {
         this.name = name;
@@ -30,7 +30,7 @@ public class User implements DataObject {
         this.role = role;
         this.email = email;
         this.password = password;
-        User.countID++;
+        User.countID ++;
         this.id = User.countID;
     }
 
