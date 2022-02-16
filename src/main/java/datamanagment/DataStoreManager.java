@@ -1,11 +1,11 @@
-package datamanagment;
+package main.java.datamanagment;
 
-import dataobjects.Product;
-import dataobjects.User;
-import enums.DataTypes;
-import exceptions.NonExistentProductId;
-import exceptions.NotLoggedInException;
-import menu.DataGenerationMenu;
+import main.java.dataobjects.Product;
+import main.java.dataobjects.User;
+import main.java.enums.DataTypes;
+import main.java.exceptions.NonExistentProductId;
+import main.java.exceptions.NotLoggedInException;
+import main.java.menu.DataGenerationMenu;
 import java.io.IOException;
 import java.util.ArrayList;
 

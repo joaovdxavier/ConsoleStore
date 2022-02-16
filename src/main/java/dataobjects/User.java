@@ -1,7 +1,7 @@
-package dataobjects;
+package main.java.dataobjects;
 
-import enums.UserRoles;
-import com.eclipsesource.json.*;
+import main.java.enums.UserRoles;
+import main.java.com.eclipsesource.json.*;
 
 public class User implements DataObject {
     private static /*@ spec_public non_null @*/ String userInformation = "User name: %s; lastname: %s; role: %s; email: %s; password: ***; id: %s";
@@ -49,6 +49,7 @@ public class User implements DataObject {
     private /*@ spec_public nullable @*/ int id;
 
     //@ public invariant 0 <= countID;
+    //@ public invariant 0 <= this.id;
     
     /*@ also
     @ assignable \nothing;

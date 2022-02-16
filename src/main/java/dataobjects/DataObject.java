@@ -1,6 +1,6 @@
-package dataobjects;
+package main.java.dataobjects;
 
-import com.eclipsesource.json.*;
+import main.java.com.eclipsesource.json.*;
 
 public interface DataObject {
     int getId();

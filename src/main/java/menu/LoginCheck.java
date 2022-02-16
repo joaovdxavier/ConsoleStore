@@ -1,7 +1,7 @@
-package menu;
+package main.java.menu;
 
-import exceptions.NotLoggedInException;
-import dataobjects.User;
+import main.java.exceptions.NotLoggedInException;
+import main.java.dataobjects.User;
 
 public class LoginCheck {
 	/*@ public normal_behavior

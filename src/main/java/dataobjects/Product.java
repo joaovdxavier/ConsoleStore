@@ -1,6 +1,6 @@
-package dataobjects;
+package main.java.dataobjects;
 
-import com.eclipsesource.json.*;
+import main.java.com.eclipsesource.json.*;
 
 public class Product implements Comparable<Product>, DataObject {
     private static /*@ spec_public non_null @*/ String productInformation = "Product name: %s; id: %s; price: %s; description: %s.";
@@ -40,7 +40,8 @@ public class Product implements Comparable<Product>, DataObject {
     private /*@ spec_public nullable @*/ int id;
     
     //@ public invariant 0 <= countID;
-
+    //@ public invariant 0 <= this.id;
+    
     /*@ also
     @ assignable \nothing;
     @ ensures \result == name; 

@@ -1,15 +1,15 @@
-package menu;
+package main.java.menu;
 
-import datamanagment.DataBasketManager;
-import datamanagment.DataStoreManager;
-import datamanagment.DataIOUtil;
-import dataobjects.User;
-import enums.MenuNames;
-import enums.UserRoles;
-import exceptions.EmailIsAlreadyUsed;
-import exceptions.NonExistentProductId;
-import exceptions.NotLoggedInException;
-import inpututils.InputUtil;
+import main.java.datamanagment.DataBasketManager;
+import main.java.datamanagment.DataStoreManager;
+import main.java.datamanagment.DataIOUtil;
+import main.java.dataobjects.User;
+import main.java.enums.MenuNames;
+import main.java.enums.UserRoles;
+import main.java.exceptions.EmailIsAlreadyUsed;
+import main.java.exceptions.NonExistentProductId;
+import main.java.exceptions.NotLoggedInException;
+import main.java.inpututils.InputUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 

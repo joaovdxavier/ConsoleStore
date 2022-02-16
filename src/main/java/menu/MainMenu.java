@@ -1,10 +1,10 @@
-package menu;
+package main.java.menu;
 
-import datamanagment.DataStoreManager;
-import enums.MenuNames;
-import exceptions.NonExistentProductId;
-import exceptions.NotLoggedInException;
-import inpututils.InputUtil;
+import main.java.datamanagment.DataStoreManager;
+import main.java.enums.MenuNames;
+import main.java.exceptions.NonExistentProductId;
+import main.java.exceptions.NotLoggedInException;
+import main.java.inpututils.InputUtil;
 import java.io.IOException;
 
 public class MainMenu implements MenuItem {

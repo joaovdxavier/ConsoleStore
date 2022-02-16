@@ -1,7 +1,7 @@
-package menu;
+package main.java.menu;
 
-import exceptions.NonExistentProductId;
-import exceptions.NotLoggedInException;
+import main.java.exceptions.NonExistentProductId;
+import main.java.exceptions.NotLoggedInException;
 import java.io.IOException;
 
 public class MenuManager {

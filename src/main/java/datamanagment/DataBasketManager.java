@@ -1,6 +1,6 @@
-package datamanagment;
+package main.java.datamanagment;
 
-import dataobjects.Product;
+import main.java.dataobjects.Product;
 
 import java.util.HashMap;
 

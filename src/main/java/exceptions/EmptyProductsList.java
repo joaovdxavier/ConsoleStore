@@ -1,4 +1,4 @@
-package exceptions;
+package main.java.exceptions;
 
 public class EmptyProductsList extends Exception {
     private static String message = "Products list is empty.";

@@ -1,8 +1,8 @@
-package menu;
+package main.java.menu;
 
-import datamanagment.DataStoreManager;
-import enums.MenuNames;
-import exceptions.NotLoggedInException;
+import main.java.datamanagment.DataStoreManager;
+import main.java.enums.MenuNames;
+import main.java.exceptions.NotLoggedInException;
 import java.io.IOException;
 
 public class ProfileMenu implements MenuItem {

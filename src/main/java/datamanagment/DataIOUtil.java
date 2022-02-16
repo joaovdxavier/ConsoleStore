@@ -1,9 +1,9 @@
-package datamanagment;
+package main.java.datamanagment;
 
-import enums.DataTypes;
-import enums.UserRoles;
-import dataobjects.Product;
-import dataobjects.User;
+import main.java.enums.DataTypes;
+import main.java.enums.UserRoles;
+import main.java.dataobjects.Product;
+import main.java.dataobjects.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import com.eclipsesource.json.*;
+import main.java.com.eclipsesource.json.*;
 
 public class DataIOUtil {
 	private static /*@ spec_public nullable @*/ ArrayList<User> users = new ArrayList<>();

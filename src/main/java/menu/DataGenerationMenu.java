@@ -1,11 +1,11 @@
-package menu;
+package main.java.menu;
 
-import enums.DataTypes;
-import enums.MenuNames;
-import exceptions.NonExistentProductId;
-import exceptions.NotLoggedInException;
-import inpututils.InputUtil;
-import testdata.DataFactory;
+import main.java.enums.DataTypes;
+import main.java.enums.MenuNames;
+import main.java.exceptions.NonExistentProductId;
+import main.java.exceptions.NotLoggedInException;
+import main.java.inpututils.InputUtil;
+import main.java.testdata.DataFactory;
 import java.io.IOException;
 
 public class DataGenerationMenu implements MenuItem {

@@ -1,11 +1,11 @@
-package menu;
+package main.java.menu;
 
-import datamanagment.DataStoreManager;
-import dataobjects.User;
-import enums.MenuNames;
-import exceptions.AlreadyLoggedIn;
-import exceptions.NonExistentProductId;
-import exceptions.NotLoggedInException;
+import main.java.datamanagment.DataStoreManager;
+import main.java.dataobjects.User;
+import main.java.enums.MenuNames;
+import main.java.exceptions.AlreadyLoggedIn;
+import main.java.exceptions.NonExistentProductId;
+import main.java.exceptions.NotLoggedInException;
 import java.io.IOException;
 import java.util.ArrayList;
 

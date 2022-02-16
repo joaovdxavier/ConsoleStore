@@ -1,11 +1,11 @@
-package testdata;
+package main.java.testdata;
 
-import datamanagment.DataStoreManager;
-import datamanagment.DataIOUtil;
-import dataobjects.Product;
-import dataobjects.User;
-import enums.DataTypes;
-import enums.UserRoles;
+import main.java.datamanagment.DataStoreManager;
+import main.java.datamanagment.DataIOUtil;
+import main.java.dataobjects.Product;
+import main.java.dataobjects.User;
+import main.java.enums.DataTypes;
+import main.java.enums.UserRoles;
 import java.io.IOException;
 
 public class DataFactory {

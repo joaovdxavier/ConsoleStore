@@ -1,4 +1,4 @@
-package inpututils;
+package main.java.inpututils;
 
 import java.util.Scanner;
 
